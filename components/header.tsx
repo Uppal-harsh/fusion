@@ -1,6 +1,6 @@
 'use client'
 import { ChevronRight, Search, Bell, Moon, Sun } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -16,8 +16,6 @@ export default function Header() {
   const toggleDarkMode = () => {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
   }
-
-  if (!mounted) return null
 
   return (
     <header className="h-14 border-b border-border/40 bg-card/50 backdrop-blur-sm flex items-center justify-between px-6 gap-4">
@@ -57,7 +55,7 @@ export default function Header() {
           aria-label="Toggle dark mode"
           className="text-muted-foreground hover:text-foreground w-8 h-8 rounded-xl"
         >
-          {resolvedTheme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          {mounted ? (resolvedTheme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />) : <Moon className="w-4 h-4" />}
         </Button>
       </div>
     </header>

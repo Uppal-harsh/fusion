@@ -1,0 +1,1128 @@
+{
+  "items": [
+    {
+      "id": "1776534134833-p4bwhm",
+      "createdAt": "2026-04-18T17:42:14.833Z",
+      "query": "asdoa",
+      "taskType": "general",
+      "topModel": "Claude 3.5 Sonnet",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesized answer (general):\nPrompt: asdoa\nPrimary signal (Claude 3.5 Sonnet): Claude 3.5 Sonnet response:\nSupporting signal (Gemini 2.5 Pro): Gemini 2.5 Pro response:\nFinal: Combine the strongest grounded claims, keep assumptions explicit, and verify critical facts before use.",
+      "ranking": [
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "GPT-4o response:\n\nFocus on a direct answer, key assumptions, and practical next "
+          ],
+          "_overall": 61
+        },
+        "claude": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Claude 3"
+          ],
+          "_overall": 62
+        },
+        "gemini": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Gemini 2"
+          ],
+          "_overall": 62
+        },
+        "llama": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Llama 3 response:\n\nFocus on a direct answer, key assumptions, and practical next"
+          ],
+          "_overall": 61
+        }
+      }
+    },
+    {
+      "id": "1776534061674-25zrkl",
+      "createdAt": "2026-04-18T17:41:01.674Z",
+      "query": "hi",
+      "taskType": "general",
+      "topModel": "Claude 3.5 Sonnet",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesized answer (general):\nPrompt: hi\nPrimary signal (Claude 3.5 Sonnet): Claude 3.5 Sonnet response:\nSupporting signal (Gemini 2.5 Pro): Gemini 2.5 Pro response:\nFinal: Combine the strongest grounded claims, keep assumptions explicit, and verify critical facts before use.",
+      "ranking": [
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "GPT-4o response:\n\nFocus on a direct answer, key assumptions, and practical next "
+          ],
+          "_overall": 61
+        },
+        "claude": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Claude 3"
+          ],
+          "_overall": 62
+        },
+        "gemini": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Gemini 2"
+          ],
+          "_overall": 62
+        },
+        "llama": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Llama 3 response:\n\nFocus on a direct answer, key assumptions, and practical next"
+          ],
+          "_overall": 61
+        }
+      }
+    },
+    {
+      "id": "1776534034546-pyoidb",
+      "createdAt": "2026-04-18T17:40:34.546Z",
+      "query": "hi",
+      "taskType": "general",
+      "topModel": "Claude 3.5 Sonnet",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesized answer (general):\nPrompt: hi\nPrimary signal (Claude 3.5 Sonnet): Claude 3.5 Sonnet response:\nSupporting signal (Gemini 2.5 Pro): Gemini 2.5 Pro response:\nFinal: Combine the strongest grounded claims, keep assumptions explicit, and verify critical facts before use.",
+      "ranking": [
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "GPT-4o response:\n\nFocus on a direct answer, key assumptions, and practical next "
+          ],
+          "_overall": 61
+        },
+        "claude": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Claude 3"
+          ],
+          "_overall": 62
+        },
+        "gemini": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Gemini 2"
+          ],
+          "_overall": 62
+        },
+        "llama": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Llama 3 response:\n\nFocus on a direct answer, key assumptions, and practical next"
+          ],
+          "_overall": 61
+        }
+      }
+    },
+    {
+      "id": "1776534032374-dttc9j",
+      "createdAt": "2026-04-18T17:40:32.374Z",
+      "query": "hi",
+      "taskType": "general",
+      "topModel": "Claude 3.5 Sonnet",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesized answer (general):\nPrompt: hi\nPrimary signal (Claude 3.5 Sonnet): Claude 3.5 Sonnet response:\nSupporting signal (Gemini 2.5 Pro): Gemini 2.5 Pro response:\nFinal: Combine the strongest grounded claims, keep assumptions explicit, and verify critical facts before use.",
+      "ranking": [
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "GPT-4o response:\n\nFocus on a direct answer, key assumptions, and practical next "
+          ],
+          "_overall": 61
+        },
+        "claude": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Claude 3"
+          ],
+          "_overall": 62
+        },
+        "gemini": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Gemini 2"
+          ],
+          "_overall": 62
+        },
+        "llama": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Llama 3 response:\n\nFocus on a direct answer, key assumptions, and practical next"
+          ],
+          "_overall": 61
+        }
+      }
+    },
+    {
+      "id": "1776534012344-92r5ez",
+      "createdAt": "2026-04-18T17:40:12.344Z",
+      "query": "hi",
+      "taskType": "general",
+      "topModel": "Claude 3.5 Sonnet",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesized answer (general):\nPrompt: hi\nPrimary signal (Claude 3.5 Sonnet): Claude 3.5 Sonnet response:\nSupporting signal (Gemini 2.5 Pro): Gemini 2.5 Pro response:\nFinal: Combine the strongest grounded claims, keep assumptions explicit, and verify critical facts before use.",
+      "ranking": [
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "GPT-4o response:\n\nFocus on a direct answer, key assumptions, and practical next "
+          ],
+          "_overall": 61
+        },
+        "claude": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Claude 3"
+          ],
+          "_overall": 62
+        },
+        "gemini": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Gemini 2"
+          ],
+          "_overall": 62
+        },
+        "llama": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Llama 3 response:\n\nFocus on a direct answer, key assumptions, and practical next"
+          ],
+          "_overall": 61
+        }
+      }
+    },
+    {
+      "id": "1776533883259-uwrsm1",
+      "createdAt": "2026-04-18T17:38:03.259Z",
+      "query": "heyy",
+      "taskType": "general",
+      "topModel": "Claude 3.5 Sonnet",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesized answer (general):\nPrompt: heyy\nPrimary signal (Claude 3.5 Sonnet): Claude 3.5 Sonnet response:\nSupporting signal (Gemini 2.5 Pro): Gemini 2.5 Pro response:\nFinal: Combine the strongest grounded claims, keep assumptions explicit, and verify critical facts before use.",
+      "ranking": [
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "GPT-4o response:\n\nFocus on a direct answer, key assumptions, and practical next "
+          ],
+          "_overall": 61
+        },
+        "claude": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Claude 3"
+          ],
+          "_overall": 62
+        },
+        "gemini": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Gemini 2"
+          ],
+          "_overall": 62
+        },
+        "llama": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Llama 3 response:\n\nFocus on a direct answer, key assumptions, and practical next"
+          ],
+          "_overall": 61
+        }
+      }
+    },
+    {
+      "id": "1776533781918-en59pq",
+      "createdAt": "2026-04-18T17:36:21.918Z",
+      "query": "hi",
+      "taskType": "general",
+      "topModel": "Claude 3.5 Sonnet",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesized answer (general):\nPrompt: hi\nPrimary signal (Claude 3.5 Sonnet): Claude 3.5 Sonnet response:\nSupporting signal (Gemini 2.5 Pro): Gemini 2.5 Pro response:\nFinal: Combine the strongest grounded claims, keep assumptions explicit, and verify critical facts before use.",
+      "ranking": [
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 62,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 61,
+          "grounding": 47,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "GPT-4o response:\n\nFocus on a direct answer, key assumptions, and practical next "
+          ],
+          "_overall": 61
+        },
+        "claude": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Claude 3"
+          ],
+          "_overall": 62
+        },
+        "gemini": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 65,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Gemini 2"
+          ],
+          "_overall": 62
+        },
+        "llama": {
+          "accuracy": 58,
+          "reasoning": 53,
+          "coherence": 64,
+          "grounding": 47,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Llama 3 response:\n\nFocus on a direct answer, key assumptions, and practical next"
+          ],
+          "_overall": 61
+        }
+      }
+    },
+    {
+      "id": "1776533731826-iwfpkq",
+      "createdAt": "2026-04-18T17:35:31.826Z",
+      "query": "hello",
+      "taskType": "general",
+      "topModel": "GPT-4o",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesis failed — network error.",
+      "ranking": [
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "claude": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "llama": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        }
+      }
+    },
+    {
+      "id": "1776533700330-7v2wjv",
+      "createdAt": "2026-04-18T17:35:00.330Z",
+      "query": "hello",
+      "taskType": "general",
+      "topModel": "GPT-4o",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesis failed — network error.",
+      "ranking": [
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "claude": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "llama": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        }
+      }
+    },
+    {
+      "id": "1776533689600-dno9g9",
+      "createdAt": "2026-04-18T17:34:49.600Z",
+      "query": "asodasdo",
+      "taskType": "general",
+      "topModel": "GPT-4o",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesis failed — network error.",
+      "ranking": [
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "claude": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "llama": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        }
+      }
+    },
+    {
+      "id": "1776533675177-iu2pxd",
+      "createdAt": "2026-04-18T17:34:35.177Z",
+      "query": "hi",
+      "taskType": "general",
+      "topModel": "GPT-4o",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesis failed — network error.",
+      "ranking": [
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "claude": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "llama": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        }
+      }
+    },
+    {
+      "id": "1776533669883-6kmzr7",
+      "createdAt": "2026-04-18T17:34:29.883Z",
+      "query": "hi",
+      "taskType": "general",
+      "topModel": "GPT-4o",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesis failed — network error.",
+      "ranking": [
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4o",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.5 Sonnet",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3",
+          "overall": 59,
+          "hallucinationRisk": "low",
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "claude": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        },
+        "llama": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Failed to parse URL from /api/query\n\n[Fallback mode] undefined credentials unava"
+          ],
+          "_overall": 59
+        }
+      }
+    }
+  ]
+}
