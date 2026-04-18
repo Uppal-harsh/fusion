@@ -1,12 +1,13 @@
 'use client'
-
 import { Send, Zap, Brain, Gauge } from 'lucide-react'
 import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
 
 const models = [
-  { name: 'cgpt', icon: Brain, color: 'bg-blue-500/20 text-blue-400' },
-  { name: 'ollama', icon: Zap, color: 'bg-yellow-500/20 text-yellow-400' },
-  { name: 'qwen', icon: Gauge, color: 'bg-purple-500/20 text-purple-400' },
+  { name: 'cgpt', icon: Brain, color: 'bg-primary/12 text-primary border-primary/35' },
+  { name: 'ollama', icon: Zap, color: 'bg-muted text-foreground border-border' },
+  { name: 'qwen', icon: Gauge, color: 'bg-muted/70 text-muted-foreground border-border' },
 ]
 
 export default function InputArea() {
@@ -28,21 +29,22 @@ export default function InputArea() {
         </h2>
         <div className="flex flex-wrap gap-3">
           {models.map((model) => (
-            <button
+            <Button
               key={model.name}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg border border-border hover:border-primary transition-colors ${model.color} text-xs font-medium`}
+              variant="outline"
+              className={`flex items-center gap-2 text-xs ${model.color}`}
             >
               <model.icon className="w-3.5 h-3.5" />
               {model.name}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
 
       {/* Input Area - ChatGPT Style */}
       <div className="flex-1 flex flex-col justify-end gap-2">
-        <div className="rounded-lg border border-border bg-card hover:border-muted focus-within:border-primary/50 focus-within:shadow-lg transition-all shadow-sm p-4">
-          <textarea
+        <div className="surface-subpanel hover:border-border/90 focus-within:border-primary/50 transition-colors p-4 flex flex-col gap-3">
+          <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
@@ -52,18 +54,18 @@ export default function InputArea() {
               }
             }}
             placeholder="Type your response..."
-            className="w-full outline-none resize-none bg-transparent text-sm text-foreground placeholder-muted-foreground max-h-40"
             rows={3}
+            className="resize-none"
           />
-          <div className="flex items-center justify-between mt-3 pt-3 border-t border-border/50">
+          <div className="flex items-center justify-between pt-3 border-t border-border/50">
             <p className="text-xs text-muted-foreground">Shift + Enter for new line</p>
-            <button
+            <Button
+              size="sm"
               onClick={handleSend}
-              className="p-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={!input.trim()}
             >
               <Send className="w-4 h-4" />
-            </button>
+            </Button>
           </div>
         </div>
       </div>
