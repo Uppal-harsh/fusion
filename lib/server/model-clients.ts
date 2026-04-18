@@ -170,5 +170,5 @@ export async function getModelResponse(modelKey: ModelKey, query: string, taskTy
   }
 
   const fallback = await Engine.getModelResponse(modelKey, query, taskType)
-  return `${fallback}\n\n[Fallback mode] ${MODEL_PERSONAS[modelKey].provider} credentials unavailable or request failed.`
+  return `${fallback}\n\n[Fallback mode] ${MODEL_PERSONAS[modelKey].name} credentials unavailable or request failed.`
 }

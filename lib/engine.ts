@@ -50,31 +50,66 @@ const TASK_WEIGHTS: Record<TaskType, Record<string, number>> = {
 // Simple in-memory history store
 const _history: Array<{ query: string; taskType: TaskType; winner: string; confidence: number; ts: number }> = []
 
+function buildLocalResponse(modelKey: ModelKey, prompt: string, taskType: TaskType): string {
+  const persona = MODEL_PERSONAS[modelKey]
+  const leadByTask: Record<TaskType, string> = {
+    general: 'Focus on a direct answer, key assumptions, and practical next steps.',
+    coding: 'Focus on correctness, edge cases, and implementation details.',
+    research: 'Separate verified facts from uncertain claims and suggest validation steps.',
+    reasoning: 'Use explicit logical steps and avoid unsupported leaps.',
+    creative: 'Keep the response coherent, vivid, and aligned with the prompt.',
+  }
+
+  return [
+    `${persona.name} response:`,
+    leadByTask[taskType],
+    `Prompt: ${prompt}`,
+    'Summary: This fallback response is generated locally when external provider calls are unavailable.',
+  ].join('\n\n')
+}
+
+function buildLocalSynthesis(
+  prompt: string,
+  responses: ResponsesByModel,
+  scores: ScoresByModel,
+  taskType: TaskType
+): string {
+  const ranked = (Object.keys(scores) as ModelKey[])
+    .map((modelKey) => ({
+      modelKey,
+      overall: scores[modelKey]._overall ?? 0,
+      response: responses[modelKey],
+    }))
+    .sort((a, b) => b.overall - a.overall)
+
+  const best = ranked[0]
+  const second = ranked[1]
+  const bestText = best?.response?.split(/\n+/)[0] || 'No strong primary response available.'
+  const secondText = second?.response?.split(/\n+/)[0] || ''
+
+  return [
+    `Synthesized answer (${taskType}):`,
+    `Prompt: ${prompt}`,
+    '',
+    `Primary signal (${MODEL_PERSONAS[best?.modelKey || 'gpt4'].name}): ${bestText}`,
+    secondText ? `Supporting signal (${MODEL_PERSONAS[second.modelKey].name}): ${secondText}` : '',
+    '',
+    'Final: Combine the strongest grounded claims, keep assumptions explicit, and verify critical facts before use.',
+  ]
+    .filter(Boolean)
+    .join('\n')
+}
+
 // ─── Engine namespace (class-like static API) ─────────────────────
 export const Engine = {
 
-  // ── 1. Get raw model response via /api/query ────────────────────
+  // ── 1. Get local fallback model response ────────────────────────
   async getModelResponse(
     modelKey: ModelKey,
     prompt: string,
     taskType: TaskType
   ): Promise<string> {
-    try {
-      const res = await fetch('/api/query', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          modelId:     MODEL_ID_MAP[modelKey],
-          prompt,
-          taskProfile: taskType,
-        }),
-      })
-      if (!res.ok) return `Error ${res.status}: ${await res.text()}`
-      const data = await res.json()
-      return (data.content as string) ?? ''
-    } catch (err) {
-      return err instanceof Error ? err.message : 'Network error'
-    }
+    return buildLocalResponse(modelKey, prompt, taskType)
   },
 
   // ── 2. Score a single model's response ─────────────────────────
@@ -132,33 +167,14 @@ export const Engine = {
     }
   },
 
-  // ── 4. Synthesize — calls /api/synthesize ──────────────────────
+  // ── 4. Synthesize — local fusion path ──────────────────────────
   async synthesize(
     prompt: string,
     responses: ResponsesByModel,
     scores: ScoresByModel,
     taskType: TaskType
   ): Promise<string> {
-    // Convert to the shape /api/synthesize expects
-    const modelResponses = (Object.keys(responses) as ModelKey[]).map((key) => ({
-      modelId:    MODEL_ID_MAP[key],
-      content:    responses[key],
-      tokensUsed: 0,
-      latencyMs:  0,
-    }))
-
-    try {
-      const res = await fetch('/api/synthesize', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt, taskProfile: taskType, responses: modelResponses }),
-      })
-      if (!res.ok) return 'Synthesis unavailable — check your OPENROUTER_API_KEY.'
-      const data = await res.json()
-      return (data.fusedAnswer as string) ?? 'No synthesized answer returned.'
-    } catch {
-      return 'Synthesis failed — network error.'
-    }
+    return buildLocalSynthesis(prompt, responses, scores, taskType)
   },
 
   // ── 5. computeOverallScore ─────────────────────────────────────

@@ -80,9 +80,9 @@ export async function POST(request: Request) {
             modelKey,
             model: MODEL_PERSONAS[modelKey].name,
             overall: typedScores[modelKey]._overall || Engine.computeOverallScore(typedScores[modelKey], taskType),
-            grounding: typedScores[modelKey].grounding_score,
+            grounding: typedScores[modelKey].grounding,
             hallucinationRisk: typedScores[modelKey].hallucination_risk,
-            biasScore: typedScores[modelKey].bias_score,
+            biasScore: 0,
             consensus: typedScores[modelKey].consensus_score || 0,
           }))
           .sort((a, b) => b.overall - a.overall)

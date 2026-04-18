@@ -51,9 +51,9 @@ export async function runCompare(query: string, taskType: TaskType, selectedMode
       modelKey,
       model: MODEL_PERSONAS[modelKey].name,
       overall: scores[modelKey]._overall || Engine.computeOverallScore(scores[modelKey], taskType),
-      grounding: scores[modelKey].grounding_score,
+      grounding: scores[modelKey].grounding,
       hallucinationRisk: scores[modelKey].hallucination_risk,
-      biasScore: scores[modelKey].bias_score,
+      biasScore: 0,
       consensus: scores[modelKey].consensus_score || 0,
     }))
     .sort((a, b) => b.overall - a.overall)
