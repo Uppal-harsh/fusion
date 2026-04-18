@@ -1,7 +1,4 @@
-import 'server-only'
-
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
-import path from 'node:path'
+import { supabase } from '@/lib/supabase'
 import type { ModelKey, ScoresByModel, TaskType } from '@/lib/engine'
 
 export type HistoryRankingItem = {
@@ -16,68 +13,63 @@ export type HistoryRankingItem = {
 
 export type HistoryEntry = {
   id: string
-  createdAt: string
+  created_at: string
   query: string
-  taskType: TaskType
-  topModel: string
+  task_type: TaskType
+  top_model: string
   confidence: number
-  synthesizedAnswer: string
-  ranking: HistoryRankingItem[]
+  synthesized_answer: string
+  responses: ResponsesByModel
   scores: ScoresByModel
 }
 
-type HistoryDb = {
-  items: HistoryEntry[]
-}
+export async function addHistoryEntry(entry: Omit<HistoryEntry, 'id' | 'created_at'>) {
+  const { data, error } = await supabase
+    .from('history')
+    .insert([
+      {
+        query: entry.query,
+        task_type: entry.task_type,
+        top_model: entry.top_model,
+        confidence: entry.confidence,
+        synthesized_answer: entry.synthesized_answer,
+        responses: entry.responses,
+        scores: entry.scores
+      }
+    ])
+    .select()
+    .single()
 
-const DATA_DIR = path.join(process.cwd(), 'data')
-const DB_FILE = path.join(DATA_DIR, 'history.json')
-
-async function ensureDb() {
-  await mkdir(DATA_DIR, { recursive: true })
-  try {
-    await readFile(DB_FILE, 'utf8')
-  } catch {
-    const initial: HistoryDb = { items: [] }
-    await writeFile(DB_FILE, JSON.stringify(initial, null, 2), 'utf8')
+  if (error) {
+    console.error('Error adding history entry:', error)
+    return null
   }
-}
-
-async function readDb(): Promise<HistoryDb> {
-  await ensureDb()
-  const raw = await readFile(DB_FILE, 'utf8')
-  try {
-    return JSON.parse(raw) as HistoryDb
-  } catch {
-    return { items: [] }
-  }
-}
-
-async function writeDb(db: HistoryDb) {
-  await writeFile(DB_FILE, JSON.stringify(db, null, 2), 'utf8')
-}
-
-export async function addHistoryEntry(entry: Omit<HistoryEntry, 'id' | 'createdAt'>) {
-  const db = await readDb()
-  const next: HistoryEntry = {
-    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-    createdAt: new Date().toISOString(),
-    ...entry,
-  }
-  db.items.unshift(next)
-  if (db.items.length > 300) {
-    db.items = db.items.slice(0, 300)
-  }
-  await writeDb(db)
-  return next
+  return data as HistoryEntry
 }
 
 export async function getHistory(limit = 20) {
-  const db = await readDb()
-  return db.items.slice(0, Math.max(1, Math.min(limit, 100)))
+  const { data, error } = await supabase
+    .from('history')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(limit)
+
+  if (error) {
+    console.error('Error fetching history:', error)
+    return []
+  }
+  return data as HistoryEntry[]
 }
 
 export async function getAllHistory() {
-  const db = await readDb()
-  return db.items
+  const { data, error } = await supabase
+    .from('history')
+    .select('*')
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Error fetching all history:', error)
+    return []
+  }
+  return data as HistoryEntry[]
 }

@@ -47,9 +47,6 @@ const TASK_WEIGHTS: Record<TaskType, Record<string, number>> = {
   creative:  { accuracy: 0.10, reasoning: 0.10, coherence: 0.40, grounding: 0.10, hallucination: 0.30 },
 }
 
-// Simple in-memory history store
-const _history: Array<{ query: string; taskType: TaskType; winner: string; confidence: number; ts: number }> = []
-
 // ─── Engine namespace (class-like static API) ─────────────────────
 export const Engine = {
 
@@ -193,17 +190,42 @@ export const Engine = {
   },
 
   // ── 7. addToHistory ───────────────────────────────────────────
-  addToHistory(
+  async addToHistory(
     query: string,
     taskType: TaskType,
     winner: string,
-    confidence: number
-  ): void {
-    _history.unshift({ query, taskType, winner, confidence, ts: Date.now() })
-    if (_history.length > 50) _history.pop()
+    confidence: number,
+    synthesizedAnswer: string,
+    responses: ResponsesByModel,
+    scores: ScoresByModel
+  ): Promise<void> {
+    try {
+      await fetch('/api/history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query,
+          task_type: taskType,
+          top_model: winner,
+          confidence,
+          synthesized_answer: synthesizedAnswer,
+          responses,
+          scores
+        }),
+      })
+    } catch (err) {
+      console.error('Failed to add to remote history:', err)
+    }
   },
 
-  getHistory() {
-    return _history
+  async getHistory(limit = 20) {
+    try {
+      const res = await fetch(`/api/history?limit=${limit}`)
+      if (!res.ok) return []
+      return await res.json()
+    } catch (err) {
+      console.error('Failed to fetch history:', err)
+      return []
+    }
   },
 }

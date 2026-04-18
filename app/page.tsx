@@ -8,6 +8,8 @@ import InputArea from '@/components/input-area'
 import StatsPanel from '@/components/stats-panel'
 import RawResponses from '@/components/raw-responses'
 import LandingPage from '@/components/landing-page'
+import HistoryModal from '@/components/history-modal'
+import type { HistoryEntry } from '@/lib/server/history-db'
 import {
   Engine,
   MODEL_PERSONAS,
@@ -30,6 +32,7 @@ export default function Home() {
   const [confidence, setConfidence] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [historyOpen, setHistoryOpen] = useState(false)
 
   const runComparison = async (nextQuery: string, nextTaskType: TaskType) => {
     const trimmedQuery = nextQuery.trim()
@@ -76,7 +79,17 @@ export default function Home() {
       setSynthesizedAnswer(synthesis)
       setTopModel(MODEL_PERSONAS[winner.modelKey].name)
       setConfidence(nextConfidence)
-      Engine.addToHistory(trimmedQuery, nextTaskType, MODEL_PERSONAS[winner.modelKey].name, nextConfidence)
+      
+      // Save to Supabase History
+      await Engine.addToHistory(
+        trimmedQuery, 
+        nextTaskType, 
+        MODEL_PERSONAS[winner.modelKey].name, 
+        nextConfidence,
+        synthesis,
+        nextResponses,
+        nextScores
+      )
     } catch {
       setError('Failed to run the comparison engine. Please try again.')
     } finally {
@@ -84,10 +97,26 @@ export default function Home() {
     }
   }
 
+  const restoreHistory = (entry: HistoryEntry) => {
+    setPhase('dashboard')
+    setQuery(entry.query)
+    setTaskType(entry.task_type)
+    setResponses(entry.responses)
+    setScores(entry.scores)
+    setSynthesizedAnswer(entry.synthesized_answer)
+    setTopModel(entry.top_model)
+    setConfidence(entry.confidence)
+  }
+
   const responseCount = useMemo(() => (responses ? Object.values(responses).filter(Boolean).length : 0), [responses])
 
   return (
     <>
+      <HistoryModal 
+        open={historyOpen} 
+        onOpenChange={setHistoryOpen} 
+        onSelect={restoreHistory} 
+      />
       {/* ── Landing overlay ── */}
       <AnimatePresence>
         {phase === 'landing' && (
@@ -102,22 +131,24 @@ export default function Home() {
         animate={{ opacity: phase === 'dashboard' ? 1 : 0 }}
         transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
       >
-        <Sidebar />
+        <Sidebar onHistoryClick={() => setHistoryOpen(true)} />
         <div className="flex-1 flex flex-col overflow-hidden">
           <Header />
 
           <div className="flex-1 flex overflow-hidden lg:flex-row flex-col">
             {/* Left panel */}
             <div className="w-full lg:w-[40%] flex flex-col border-r border-b lg:border-b-0 border-border/40 overflow-hidden bg-background">
-              <div className="flex-shrink-0 border-b border-border/40">
+              <div className="flex-1 overflow-hidden">
+                <RawResponses
+                  responses={responses}
+                  scores={scores}
+                  taskType={taskType}
+                  isRunning={isRunning}
+                />
+              </div>
+              <div className="flex-shrink-0 border-t border-border/40">
                 <InputArea onRun={runComparison} isRunning={isRunning} />
               </div>
-              <RawResponses
-                responses={responses}
-                scores={scores}
-                taskType={taskType}
-                isRunning={isRunning}
-              />
             </div>
 
             {/* Right panel */}
