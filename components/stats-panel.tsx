@@ -42,7 +42,9 @@ export default function StatsPanel() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 min-h-0 overflow-hidden">
           {/* Interactive Chart */}
           <div className="flex flex-col gap-3 surface-subpanel p-4 min-h-0 overflow-hidden">
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Benchmark Trend</p>
+            <button className="w-full inline-flex items-center justify-center px-2 py-1 rounded-md bg-primary/30 border-2 border-primary/60 hover:bg-primary/40 transition-colors">
+              <p className="text-xs font-bold text-primary uppercase tracking-wide">Benchmark Trend</p>
+            </button>
             <div className="flex-1 flex items-end justify-center gap-2 py-3 min-h-0">
               {[40, 65, 85, 75, 90, 70, 88].map((height, idx) => (
                 <div
@@ -60,7 +62,9 @@ export default function StatsPanel() {
 
           {/* Model Consensus */}
           <div className="flex flex-col gap-3 surface-subpanel p-4 min-h-0 overflow-hidden">
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Model Consensus</p>
+            <button className="w-full inline-flex items-center justify-center px-2 py-1 rounded-md bg-primary/30 border-2 border-primary/60 hover:bg-primary/40 transition-colors">
+              <p className="text-xs font-bold text-primary uppercase tracking-wide">Model Consensus</p>
+            </button>
             <div className="space-y-2 min-h-0 overflow-y-auto pr-1">
               {[
                 { name: 'cgpt', width: 85, color: 'bg-primary/80' },
