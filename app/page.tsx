@@ -5,6 +5,7 @@ import Sidebar from '@/components/sidebar'
 import Header from '@/components/header'
 import InputArea from '@/components/input-area'
 import StatsPanel from '@/components/stats-panel'
+import RawResponses from '@/components/raw-responses'
 import {
   Engine,
   MODEL_PERSONAS,
@@ -86,12 +87,20 @@ export default function Home() {
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header with breadcrumbs */}
         <Header />
-        
+
         {/* Main content area - Responsive */}
         <div className="flex-1 flex overflow-hidden lg:flex-row flex-col">
           {/* Middle section - 40% on desktop, full on mobile */}
-          <div className="w-full lg:w-[40%] flex flex-col border-r border-b lg:border-b-0 border-border/40 overflow-hidden">
-            <InputArea onRun={handleRun} isRunning={isRunning} />
+          <div className="w-full lg:w-[40%] flex flex-col border-r border-b lg:border-b-0 border-border/40 overflow-hidden bg-muted/10">
+            <RawResponses
+              responses={responses}
+              scores={scores}
+              taskType={taskType}
+              isRunning={isRunning}
+            />
+            <div className="flex-shrink-0 border-t border-border/40 shadow-[0_-4px_24px_rgba(0,0,0,0.1)]">
+              <InputArea onRun={handleRun} isRunning={isRunning} />
+            </div>
           </div>
           {/* Right section - 60% on desktop, full on mobile */}
           <div className="w-full lg:w-[60%] flex flex-col overflow-hidden">

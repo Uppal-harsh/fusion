@@ -153,11 +153,18 @@ export const Engine = {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt, taskProfile: taskType, responses: modelResponses }),
       })
-      if (!res.ok) return 'Synthesis unavailable — check your OPENROUTER_API_KEY.'
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        const msg = body?.error ?? `HTTP ${res.status}`
+        console.error('[synthesize] error:', msg)
+        return `Synthesis failed: ${msg}`
+      }
       const data = await res.json()
       return (data.fusedAnswer as string) ?? 'No synthesized answer returned.'
-    } catch {
-      return 'Synthesis failed — network error.'
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Network error'
+      console.error('[synthesize] catch:', msg)
+      return `Synthesis failed: ${msg}`
     }
   },
 

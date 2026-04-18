@@ -202,54 +202,12 @@ export default function StatsPanel({
             ))
           )}
 
-          {/* Source Note */}
-          <div className="pt-2 border-t border-border/30">
-            <p className="text-[10px] text-muted-foreground/60">Top model: {topModel} · Confidence: {confidence}%</p>
-            <p className="text-[10px] text-muted-foreground/60">Task: {taskType} {query ? `· Query length: ${query.length} chars` : ''}</p>
-            {claimPreview.length > 0 && (
-              <p className="text-[10px] text-muted-foreground/60 mt-1">Claims sampled: {claimPreview.join(' · ')}</p>
-            )}
-          </div>
-
-          <div className="pt-3 border-t border-border/30 flex flex-col gap-2">
-            <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">Raw Model Responses</p>
-
-            <div className="flex flex-wrap gap-1.5">
-              {rankedModels.map((modelKey) => {
-                const modelName = MODEL_PERSONAS[modelKey].name
-                const overall = scores ? (scores[modelKey]._overall || Engine.computeOverallScore(scores[modelKey], taskType)) : null
-                const isActive = selectedModelKey === modelKey
-
-                return (
-                  <button
-                    key={modelKey}
-                    onClick={() => setSelectedModel(modelKey)}
-                    className={`text-xs rounded-xl border px-2.5 py-1 transition-all duration-200 font-medium ${
-                      isActive
-                        ? 'bg-primary/15 border-primary/25 text-primary'
-                        : 'bg-muted/40 border-border text-muted-foreground hover:text-foreground hover:border-border'
-                    }`}
-                  >
-                    {modelName}
-                    {overall !== null ? ` (${overall}%)` : ''}
-                  </button>
-                )
-              })}
+          <div className="mt-auto pt-3 border-t border-border/20">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Synthesis Metadata</span>
+              <span className="text-[10px] text-muted-foreground/60">Target: {topModel}</span>
+              <span className="text-[10px] text-muted-foreground/60">Reliability: {confidence}%</span>
             </div>
-
-            <div className="rounded-xl border border-border/60 bg-muted/20 p-3 h-32 overflow-y-auto">
-              {selectedResponse ? (
-                <p className="text-xs text-foreground whitespace-pre-wrap leading-relaxed">{selectedResponse}</p>
-              ) : (
-                <p className="text-xs text-muted-foreground">Run a prompt to view individual model responses.</p>
-              )}
-            </div>
-
-            {selectedScore && (
-              <p className="text-[10px] text-muted-foreground/60">
-                {MODEL_PERSONAS[selectedModelKey].name}: {selectedScore.grounding_score}% grounding · {selectedScore.hallucination_risk} hallucination risk
-              </p>
-            )}
           </div>
         </div>
       </div>
