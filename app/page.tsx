@@ -1,11 +1,13 @@
 "use client"
 
 import { useMemo, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import Sidebar from '@/components/sidebar'
 import Header from '@/components/header'
 import InputArea from '@/components/input-area'
 import StatsPanel from '@/components/stats-panel'
 import RawResponses from '@/components/raw-responses'
+import LandingPage from '@/components/landing-page'
 import {
   Engine,
   MODEL_PERSONAS,
@@ -18,6 +20,7 @@ import {
 const MODEL_KEYS = Object.keys(MODEL_PERSONAS) as ModelKey[]
 
 export default function Home() {
+  const [phase, setPhase] = useState<'landing' | 'dashboard'>('landing')
   const [query, setQuery] = useState('')
   const [taskType, setTaskType] = useState<TaskType>('general')
   const [responses, setResponses] = useState<ResponsesByModel | null>(null)
@@ -28,10 +31,12 @@ export default function Home() {
   const [isRunning, setIsRunning] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const handleRun = async (nextQuery: string, nextTaskType: TaskType) => {
+  const runComparison = async (nextQuery: string, nextTaskType: TaskType) => {
     const trimmedQuery = nextQuery.trim()
     if (!trimmedQuery || isRunning) return
 
+    // Transition to dashboard first, then kick off the requests
+    setPhase('dashboard')
     setIsRunning(true)
     setError(null)
     setQuery(trimmedQuery)
@@ -82,43 +87,57 @@ export default function Home() {
   const responseCount = useMemo(() => (responses ? Object.values(responses).filter(Boolean).length : 0), [responses])
 
   return (
-    <div className="h-screen flex overflow-hidden bg-background text-foreground">
-      <Sidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Header with breadcrumbs */}
-        <Header />
+    <>
+      {/* ── Landing overlay ── */}
+      <AnimatePresence>
+        {phase === 'landing' && (
+          <LandingPage onSubmit={runComparison} />
+        )}
+      </AnimatePresence>
 
-        {/* Main content area - Responsive */}
-        <div className="flex-1 flex overflow-hidden lg:flex-row flex-col">
-          {/* Middle section - 40% on desktop, full on mobile */}
-          <div className="w-full lg:w-[40%] flex flex-col border-r border-b lg:border-b-0 border-border/40 overflow-hidden bg-muted/10">
-            <RawResponses
-              responses={responses}
-              scores={scores}
-              taskType={taskType}
-              isRunning={isRunning}
-            />
-            <div className="flex-shrink-0 border-t border-border/40 shadow-[0_-4px_24px_rgba(0,0,0,0.1)]">
-              <InputArea onRun={handleRun} isRunning={isRunning} />
+      {/* ── Dashboard (always mounted, fades in behind landing) ── */}
+      <motion.div
+        className="h-screen flex overflow-hidden bg-background text-foreground"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: phase === 'dashboard' ? 1 : 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+      >
+        <Sidebar />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Header />
+
+          <div className="flex-1 flex overflow-hidden lg:flex-row flex-col">
+            {/* Left panel */}
+            <div className="w-full lg:w-[40%] flex flex-col border-r border-b lg:border-b-0 border-border/40 overflow-hidden bg-background">
+              <div className="flex-shrink-0 border-b border-border/40">
+                <InputArea onRun={runComparison} isRunning={isRunning} />
+              </div>
+              <RawResponses
+                responses={responses}
+                scores={scores}
+                taskType={taskType}
+                isRunning={isRunning}
+              />
+            </div>
+
+            {/* Right panel */}
+            <div className="w-full lg:w-[60%] flex flex-col overflow-hidden">
+              <StatsPanel
+                query={query}
+                taskType={taskType}
+                scores={scores}
+                responses={responses}
+                synthesizedAnswer={synthesizedAnswer}
+                topModel={topModel}
+                confidence={confidence}
+                responseCount={responseCount}
+                isRunning={isRunning}
+                error={error}
+              />
             </div>
           </div>
-          {/* Right section - 60% on desktop, full on mobile */}
-          <div className="w-full lg:w-[60%] flex flex-col overflow-hidden">
-            <StatsPanel
-              query={query}
-              taskType={taskType}
-              scores={scores}
-              responses={responses}
-              synthesizedAnswer={synthesizedAnswer}
-              topModel={topModel}
-              confidence={confidence}
-              responseCount={responseCount}
-              isRunning={isRunning}
-              error={error}
-            />
-          </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </>
   )
 }
