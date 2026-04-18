@@ -9,9 +9,9 @@ import {
   Settings,
   HelpCircle,
   Plus,
-  Layers,
 } from 'lucide-react'
 import { useState } from 'react'
+import Image from 'next/image'
 
 export default function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -32,14 +32,21 @@ export default function Sidebar() {
       <div className="flex items-center p-3 h-14">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="p-2 rounded-xl hover:bg-sidebar-accent transition-colors text-sidebar-foreground"
+          className="p-2 rounded-xl hover:bg-sidebar-accent transition-colors text-sidebar-foreground flex-shrink-0"
           aria-label="Toggle sidebar"
         >
           <Menu className="w-[18px] h-[18px]" />
         </button>
-        <div className={`font-semibold text-sidebar-foreground flex items-center gap-2 text-[15px] tracking-tight ${labelClass}`}>
-          <Layers className="w-[18px] h-[18px] text-primary" />
-          <span>Fusion</span>
+        <div className={`text-sidebar-foreground flex items-center gap-2.5 text-[22px] font-brand font-[800] tracking-tight ${labelClass}`}>
+          <div className="relative w-6 h-6 rounded-lg overflow-hidden border border-primary/20 bg-background flex-shrink-0">
+            <Image 
+              src="/logo.png" 
+              alt="Logo" 
+              fill 
+              className="object-cover scale-110" 
+            />
+          </div>
+          <span className="leading-none mt-1">Fusion</span>
         </div>
       </div>
 
@@ -66,8 +73,8 @@ export default function Sidebar() {
               key={item.label}
               className={`flex items-center rounded-xl transition-colors w-full text-sm ${rowClass} ${
                 item.active
-                  ? 'bg-sidebar-accent text-sidebar-foreground font-medium'
-                  : 'text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-foreground'
+                  ? 'bg-sidebar-accent text-sidebar-foreground font-medium shadow-sm shadow-black/10'
+                  : 'text-muted-foreground/80 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground transition-all duration-200'
               }`}
             >
               <item.icon className="w-4 h-4 flex-shrink-0" />

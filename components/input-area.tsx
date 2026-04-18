@@ -11,6 +11,11 @@ import {
   AccordionTrigger 
 } from '@/components/ui/accordion'
 import { cn } from '@/lib/utils'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 const models = [
   { key: 'gpt4', icon: Brain, color: 'bg-primary/10 text-primary border-primary/25' },
@@ -60,13 +65,21 @@ export default function InputArea({ onRun, isRunning }: InputAreaProps) {
                     </h2>
                     <div className="grid grid-cols-2 gap-2">
                       {models.map((model) => (
-                        <div
-                          key={model.key}
-                          className={`flex items-center gap-2 text-[11px] h-9 px-3 p-2 rounded-xl border transition-all duration-200 cursor-default ${model.color} hover:bg-opacity-80`}
-                        >
-                          <model.icon className="w-3.5 h-3.5" />
-                          <span className="font-medium">{MODEL_PERSONAS[model.key].name}</span>
-                        </div>
+                        <Tooltip key={model.key}>
+                          <TooltipTrigger asChild>
+                            <div
+                              className={`flex items-center gap-2 text-[11px] h-9 px-3 p-2 rounded-xl border transition-all duration-200 cursor-help ${model.color} hover:bg-opacity-80`}
+                            >
+                              <model.icon className="w-3.5 h-3.5" />
+                              <span className="font-medium whitespace-nowrap overflow-hidden text-ellipsis">
+                                {MODEL_PERSONAS[model.key].name}
+                              </span>
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent side="bottom" className="max-w-[180px]">
+                            {MODEL_PERSONAS[model.key].description}
+                          </TooltipContent>
+                        </Tooltip>
                       ))}
                     </div>
                   </div>

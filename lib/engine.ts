@@ -11,16 +11,16 @@ export type ModelKey = 'gpt4' | 'claude' | 'gemini' | 'llama'
 // Maps the UI's ModelKey to the OpenRouter model ID in the request body
 const MODEL_ID_MAP: Record<ModelKey, string> = {
   gpt4:   'gpt-4o',
-  claude: 'claude-3-5-sonnet',
+  claude: 'anthropic/claude-sonnet-3.5',
   gemini: 'gemini-2-5-pro',
-  llama:  'llama-3',
+  llama:  'llama-3-8b',
 }
 
 export const MODEL_PERSONAS: Record<ModelKey, { name: string; description: string }> = {
   gpt4:   { name: 'GPT-4o',           description: 'OpenAI flagship — strong reasoning & coding' },
-  claude: { name: 'Claude 3.5 Sonnet', description: 'Anthropic — nuanced, thoughtful, low hallucination' },
-  gemini: { name: 'Gemini 2.5 Pro',    description: 'Google — multimodal, strong grounding' },
-  llama:  { name: 'Llama 3',           description: 'Meta — fast open-source, good general use' },
+  claude: { name: 'Claude 3.5 Sonnet',  description: 'Anthropic — elite reasoning, peak world knowledge' },
+  gemini: { name: 'Gemini 2.5 Pro',    description: 'Google — multimodal powerhouse' },
+  llama:  { name: 'Ollama 3',          description: 'Local-first / Meta — fast & efficient' },
 }
 
 // ─── Score shape per model ─────────────────────────────────────────

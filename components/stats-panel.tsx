@@ -1,7 +1,10 @@
 'use client'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { TrendingUp, CheckCircle, AlertCircle, BarChart3, LineChart } from 'lucide-react'
 import { Engine, MODEL_PERSONAS, type ModelKey, type ResponsesByModel, type ScoresByModel, type TaskType } from '@/lib/engine'
+import ShinyText from './ui/shiny-text'
+
+const LOADING_STEPS = ["Generating answer...", "Comparing answers...", "Analysing..."]
 
 type StatsPanelProps = {
   query: string
@@ -57,6 +60,17 @@ export default function StatsPanel({
   const selectedModelKey = rankedModels.includes(selectedModel) ? selectedModel : rankedModels[0]
   const selectedResponse = selectedModelKey && responses ? responses[selectedModelKey] : ''
   const selectedScore = selectedModelKey && scores ? scores[selectedModelKey] : null
+
+  const [loadingIndex, setLoadingIndex] = useState(0)
+
+  // Cycle through loading steps
+  useEffect(() => {
+    if (!isRunning) return
+    const interval = setInterval(() => {
+      setLoadingIndex((prev) => (prev + 1) % LOADING_STEPS.length)
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [isRunning])
 
   const stats = [
     { label: 'Avg Quality', value: `${avgQuality}%`, icon: TrendingUp, color: 'text-primary' },
@@ -194,6 +208,19 @@ export default function StatsPanel({
         <div className="flex-1 flex flex-col gap-3 overflow-y-auto min-h-0">
           {error ? (
             <p className="text-sm text-destructive leading-relaxed">{error}</p>
+          ) : isRunning ? (
+            <div className="flex flex-col gap-2 pt-2">
+              <ShinyText 
+                text={LOADING_STEPS[loadingIndex]} 
+                speed={1.5} 
+                color="oklch(0.60 0.01 60)" 
+                shineColor="oklch(0.78 0.13 75)"
+                className="text-lg font-bold tracking-tight"
+              />
+              <p className="text-[11px] text-muted-foreground/60 italic animate-pulse">
+                Merging inputs from {responseCount || 4} models...
+              </p>
+            </div>
           ) : (
             answerLines.map((line, idx) => (
               <p key={`${line}-${idx}`} className="text-sm text-foreground leading-relaxed">

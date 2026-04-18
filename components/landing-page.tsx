@@ -2,8 +2,24 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
-import { Send, Zap } from 'lucide-react'
+import { Send } from 'lucide-react'
 import type { TaskType } from '@/lib/engine'
+import { ThemeToggle } from '@/components/theme-toggle'
+import Image from 'next/image'
+import FallingRays from '@/components/ui/falling-rays'
+import { useTheme } from 'next-themes'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+
+const MODEL_DESCRIPTIONS: Record<string, string> = {
+  'GPT-4o': 'OpenAI flagship — strong reasoning & coding',
+  'Claude 3.5 Sonnet': 'Anthropic — elite reasoning, peak world knowledge',
+  'Gemini 2.5 Pro': 'Google — multimodal powerhouse',
+  'Ollama 3': 'Local-first / Meta — fast & efficient'
+}
 
 const SUGGESTIONS = [
   'Compare how GPT-4o vs Claude handles logical paradoxes',
@@ -17,6 +33,7 @@ type Props = {
 }
 
 export default function LandingPage({ onSubmit }: Props) {
+  const { theme } = useTheme()
   const [input, setInput] = useState('')
   const [focused, setFocused] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -40,12 +57,22 @@ export default function LandingPage({ onSubmit }: Props) {
     }
   }
 
+  // Use the brand orange for light mode rays
+  const rayColor1 = theme === 'light' ? '#d97706' : '#fbbf24'
+  const rayColor2 = theme === 'light' ? '#b45309' : '#d97706'
+
   return (
     <motion.div
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: 'easeInOut' }}
     >
+      <FallingRays 
+        color1={rayColor1} 
+        color2={rayColor2} 
+        rayCount={30} 
+        className={theme === 'light' ? "opacity-20" : "opacity-40"}
+      />
       {/* Subtle radial glow behind the card */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -55,6 +82,20 @@ export default function LandingPage({ onSubmit }: Props) {
         }}
       />
 
+      {/* Top right actions */}
+      <div className="absolute top-6 right-6 z-10">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div>
+              <ThemeToggle />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent side="left">
+            Change appearance
+          </TooltipContent>
+        </Tooltip>
+      </div>
+
       <div className="relative w-full max-w-2xl px-6 flex flex-col items-center gap-10">
         {/* Logo + tagline */}
         <motion.div
@@ -63,11 +104,17 @@ export default function LandingPage({ onSubmit }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.6, ease: 'easeOut' }}
         >
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
-              <Zap className="w-5 h-5 text-primary" />
+          <div className="flex items-center gap-4">
+            <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-primary/20 shadow-lg shadow-primary/5">
+              <Image 
+                src="/logo.png" 
+                alt="Fusion Logo" 
+                fill 
+                className="object-cover"
+                priority
+              />
             </div>
-            <span className="text-3xl font-black tracking-tight text-foreground">Fusion</span>
+            <span className="text-5xl font-brand font-[800] tracking-tight text-foreground">Fusion</span>
           </div>
           <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
             Compare GPT-4o, Claude, Gemini & Llama side-by-side.<br />
@@ -134,13 +181,17 @@ export default function LandingPage({ onSubmit }: Props) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.5 }}
         >
-          {['GPT-4o', 'Claude 3.7', 'Gemini 2.5', 'Llama 3.3'].map((m) => (
-            <span
-              key={m}
-              className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 px-2.5 py-1 rounded-lg bg-muted/30 border border-border/30"
-            >
-              {m}
-            </span>
+          {['GPT-4o', 'Claude 3.5 Sonnet', 'Gemini 2.5 Pro', 'Ollama 3'].map((m) => (
+            <Tooltip key={m}>
+              <TooltipTrigger asChild>
+                <span className="cursor-help text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 px-2.5 py-1 rounded-lg bg-muted/30 border border-border/30 hover:bg-muted/50 transition-colors">
+                  {m}
+                </span>
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                {MODEL_DESCRIPTIONS[m]}
+              </TooltipContent>
+            </Tooltip>
           ))}
         </motion.div>
       </div>
