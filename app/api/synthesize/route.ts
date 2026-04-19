@@ -139,7 +139,7 @@ async function callJudge(
     apiKey: apiKey,
   });
   const responseBlock = responses
-    .map((r) => `### ${r.modelId}\n${r.content}`)
+    .map((r) => `### ${r.modelId}\n${r.content.slice(0, 400)}`)
     .join("\n\n");
 
   const judgePrompt = `You are an expert AI evaluator assessing multiple model responses.
@@ -174,14 +174,22 @@ Return ONLY valid JSON — no markdown fences, no preamble:
 
   const response = await openrouter.chat.send({
     chatRequest: {
-      model: "anthropic/claude-sonnet-4-5",
-      maxTokens: 2048,
+      model: "openai/gpt-4o",
+      maxTokens: 1024,
       messages: [{ role: "user", content: judgePrompt }],
     },
   });
 
   const text = response.choices[0]?.message?.content ?? "{}";
-  return JSON.parse(text) as JudgeOutput;
+  
+  try {
+    // Strip markdown code blocks if the model included them (e.g. ```json ... ```)
+    const cleaned = text.replace(/```json/g, "").replace(/```/g, "").trim();
+    return JSON.parse(cleaned) as JudgeOutput;
+  } catch (err) {
+    console.error("Judge JSON parse error. Raw text:", text);
+    throw new Error("Judge returned invalid JSON formatting.");
+  }
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────

@@ -10,7 +10,7 @@ import { logBackendEvent } from '@/lib/server/event-log'
 // ─── OpenRouter model identifiers ─────────────────────────────────
 const OPENROUTER_MODELS: Record<ModelId, string> = {
   "gpt-4o":            "openai/gpt-4o",
-  "claude-3-5-sonnet": "anthropic/claude-sonnet-4-5",
+  "claude-3-5-sonnet": "anthropic/claude-3.7-sonnet",
   "gemini-2-5-pro":    "google/gemini-2.5-pro",
   "llama-3":           "meta-llama/llama-3.3-70b-instruct",
 };
