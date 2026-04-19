@@ -1,10 +1,12 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useSession } from 'next-auth/react'
 import Sidebar from '@/components/sidebar'
 import Header from '@/components/header'
 import InputArea from '@/components/input-area'
 import StatsPanel from '@/components/stats-panel'
+import GoogleAuthModal from '@/components/google-auth-modal'
 import {
   type ResponsesByModel,
   type ScoresByModel,
@@ -42,6 +44,8 @@ type StreamEventPayloads = {
 }
 
 export default function Home() {
+  const { status } = useSession()
+  const isAuthenticated = status === 'authenticated'
   const [query, setQuery] = useState('')
   const [taskType, setTaskType] = useState<TaskType>('general')
   const [responses, setResponses] = useState<ResponsesByModel | null>(null)
@@ -52,6 +56,11 @@ export default function Home() {
   const [isRunning, setIsRunning] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [historyItems, setHistoryItems] = useState<HistoryItem[]>([])
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
+
+  const requestLogin = useCallback(() => {
+    setIsAuthModalOpen(true)
+  }, [])
 
   const loadHistory = useCallback(async () => {
     try {
@@ -65,14 +74,31 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      setHistoryItems([])
+      return
+    }
+
     loadHistory()
     const id = window.setInterval(loadHistory, 7000)
     return () => window.clearInterval(id)
-  }, [loadHistory])
+  }, [isAuthenticated, loadHistory])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setIsAuthModalOpen(false)
+    }
+  }, [isAuthenticated])
 
   const handleRun = async (nextQuery: string, nextTaskType: TaskType) => {
     const trimmedQuery = nextQuery.trim()
     if (!trimmedQuery || isRunning) return
+
+    if (!isAuthenticated) {
+      setError('Sign in with Google to run comparisons.')
+      setIsAuthModalOpen(true)
+      return
+    }
 
     setIsRunning(true)
     setError(null)
@@ -176,36 +202,45 @@ export default function Home() {
   const responseCount = useMemo(() => (responses ? Object.values(responses).filter(Boolean).length : 0), [responses])
 
   return (
-    <div className="h-screen flex overflow-hidden bg-background text-foreground">
-      <Sidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Header with breadcrumbs */}
-        <Header />
-        
-        {/* Main content area - Responsive */}
-        <div className="flex-1 flex overflow-hidden lg:flex-row flex-col">
-          {/* Middle section - 40% on desktop, full on mobile */}
-          <div className="w-full lg:w-[40%] flex flex-col border-r border-b lg:border-b-0 border-border/40 overflow-hidden">
-            <InputArea onRun={handleRun} isRunning={isRunning} responses={responses} />
-          </div>
-          {/* Right section - 60% on desktop, full on mobile */}
-          <div className="w-full lg:w-[60%] flex flex-col overflow-hidden">
-            <StatsPanel
-              query={query}
-              taskType={taskType}
-              scores={scores}
-              responses={responses}
-              synthesizedAnswer={synthesizedAnswer}
-              topModel={topModel}
-              confidence={confidence}
-              responseCount={responseCount}
-              isRunning={isRunning}
-              error={error}
-              historyItems={historyItems}
-            />
+    <>
+      <div className="h-screen flex overflow-hidden bg-background text-foreground">
+        <Sidebar />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Header with breadcrumbs */}
+          <Header />
+
+          {/* Main content area - Responsive */}
+          <div className="flex-1 flex overflow-hidden lg:flex-row flex-col">
+            {/* Middle section - 40% on desktop, full on mobile */}
+            <div className="w-full lg:w-[40%] flex flex-col border-r border-b lg:border-b-0 border-border/40 overflow-hidden">
+              <InputArea
+                onRun={handleRun}
+                isRunning={isRunning}
+                responses={responses}
+                isAuthenticated={isAuthenticated}
+                onRequireLogin={requestLogin}
+              />
+            </div>
+            {/* Right section - 60% on desktop, full on mobile */}
+            <div className="w-full lg:w-[60%] flex flex-col overflow-hidden">
+              <StatsPanel
+                query={query}
+                taskType={taskType}
+                scores={scores}
+                responses={responses}
+                synthesizedAnswer={synthesizedAnswer}
+                topModel={topModel}
+                confidence={confidence}
+                responseCount={responseCount}
+                isRunning={isRunning}
+                error={error}
+                historyItems={historyItems}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <GoogleAuthModal open={isAuthModalOpen} onOpenChange={setIsAuthModalOpen} />
+    </>
   )
 }

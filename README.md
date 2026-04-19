@@ -238,12 +238,38 @@ Optional query param:
 
 - limit, default 20
 
+### GET /api/history/benchmarks
+
+Optional query param:
+
+- limit, default 50
+
+Returned items include per-run `totalTokens` and `totalLatencyMs` telemetry.
+
 ### GET /api/history/export
 
 Query params:
 
 - format=json
 - format=csv
+
+CSV export includes benchmark columns: `responseCount`, `totalTokens`, and `totalLatencyMs`.
+
+### GET /api/user/profile
+
+Returns signed-in user details and aggregate performance metrics.
+
+### GET /api/user/activity
+
+Returns recent backend activity events logged for the signed-in user.
+
+### GET /api/user/settings
+
+Returns saved user settings for the signed-in account.
+
+### PUT /api/user/settings
+
+Updates user settings for the signed-in account.
 
 ## Environment Variables
 
@@ -254,7 +280,28 @@ OPENAI_API_KEY=
 ANTHROPIC_API_KEY=
 GOOGLE_API_KEY=
 GROQ_API_KEY=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=http://localhost:3000
+NEXT_PUBLIC_SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
 ```
+
+## Supabase Setup
+
+1. Open your Supabase SQL editor.
+2. Run the schema in `supabase/schema.sql`.
+3. Copy your project URL into `NEXT_PUBLIC_SUPABASE_URL`.
+4. Copy your service role key into `SUPABASE_SERVICE_ROLE_KEY`.
+5. Restart the app.
+
+The schema creates:
+
+- `fusion_users` for account metadata
+- `fusion_history` for compare runs and benchmark telemetry
+- `fusion_user_settings` for per-user preferences
+- `fusion_event_logs` for backend activity logs
 
 ## Local Development
 
@@ -289,4 +336,4 @@ npm start
 ## Notes
 
 - If editor shows CSS warnings for @apply, @theme, or @custom-variant, but npm run build passes, this is typically editor tooling mismatch rather than runtime failure.
-- For multi-instance production environments, replace file history with a shared DB (for example Postgres).
+- If Supabase env variables are missing, Fusion falls back to local file history storage.

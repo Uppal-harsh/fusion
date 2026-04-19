@@ -1,7 +1,9 @@
 import { z } from 'zod'
 import { Engine, MODEL_PERSONAS, type ModelKey, type ResponsesByModel, type ScoresByModel, type TaskType } from '@/lib/engine'
-import { getModelResponse } from '@/lib/server/model-clients'
-import { addHistoryEntry } from '@/lib/server/history-db'
+import { getModelResponseWithTelemetry } from '@/lib/server/model-clients'
+import { addHistoryEntry, upsertUserDetails } from '@/lib/server/history-db'
+import { auth } from '@/auth'
+import { logBackendEvent } from '@/lib/server/event-log'
 
 export const runtime = 'nodejs'
 
@@ -18,10 +20,54 @@ function sseEvent(event: string, data: unknown) {
 }
 
 export async function POST(request: Request) {
+  const session = await auth()
+  if (!session?.user) {
+    await logBackendEvent({
+      eventType: 'compare_stream_unauthorized',
+      route: '/api/compare/stream',
+      statusCode: 401,
+    })
+
+    return new Response(sseEvent('error', { message: 'Unauthorized. Please sign in with Google.' }), {
+      status: 401,
+      headers: {
+        'Content-Type': 'text/event-stream',
+      },
+    })
+  }
+
+  const userEmail = session.user.email?.trim().toLowerCase()
+  if (!userEmail) {
+    await logBackendEvent({
+      eventType: 'compare_stream_missing_email',
+      route: '/api/compare/stream',
+      statusCode: 400,
+    })
+
+    return new Response(sseEvent('error', { message: 'Your Google account did not provide an email address.' }), {
+      status: 400,
+      headers: {
+        'Content-Type': 'text/event-stream',
+      },
+    })
+  }
+
+  await upsertUserDetails(userEmail, {
+    name: session.user.name,
+    image: session.user.image,
+  })
+
   const body = await request.json().catch(() => null)
   const parsed = requestSchema.safeParse(body)
 
   if (!parsed.success) {
+    await logBackendEvent({
+      userEmail,
+      eventType: 'compare_stream_invalid_payload',
+      route: '/api/compare/stream',
+      statusCode: 400,
+    })
+
     return new Response(sseEvent('error', { message: 'Invalid request payload.' }), {
       status: 400,
       headers: {
@@ -46,15 +92,27 @@ export async function POST(request: Request) {
         push('status', { phase: 'start', query, taskType, models })
 
         const responses: Partial<ResponsesByModel> = {}
+        const telemetryByModel: Record<string, { tokensUsed: number; latencyMs: number; provider: string; source: 'api' | 'fallback' }> = {}
+        let totalTokens = 0
+        let totalLatencyMs = 0
 
         for (const modelKey of models) {
           push('status', { phase: 'model_start', modelKey, modelName: MODEL_PERSONAS[modelKey].name })
-          const responseText = await getModelResponse(modelKey, query, taskType)
-          responses[modelKey] = responseText
+          const telemetry = await getModelResponseWithTelemetry(modelKey, query, taskType)
+          responses[modelKey] = telemetry.text
+          telemetryByModel[modelKey] = {
+            tokensUsed: telemetry.tokensUsed,
+            latencyMs: telemetry.latencyMs,
+            provider: telemetry.provider,
+            source: telemetry.source,
+          }
+          totalTokens += telemetry.tokensUsed
+          totalLatencyMs += telemetry.latencyMs
+
           push('model_response', {
             modelKey,
             modelName: MODEL_PERSONAS[modelKey].name,
-            response: responseText,
+            response: telemetry.text,
           })
         }
 
@@ -89,8 +147,17 @@ export async function POST(request: Request) {
 
         const topModel = ranking[0]?.model || 'N/A'
         const confidence = Engine.computeConfidence(typedScores)
+        const benchmark = {
+          taskType,
+          evaluatedDimensions: ['accuracy', 'reasoning', 'coherence', 'completeness', 'safety'],
+          responseCount: models.length,
+          totalTokens,
+          totalLatencyMs,
+          modelTelemetry: telemetryByModel,
+        }
 
         await addHistoryEntry({
+          userEmail,
           query,
           taskType,
           topModel,
@@ -98,6 +165,22 @@ export async function POST(request: Request) {
           synthesizedAnswer,
           ranking,
           scores: typedScores,
+          benchmark,
+        })
+
+        await logBackendEvent({
+          userEmail,
+          eventType: 'compare_stream_completed',
+          route: '/api/compare/stream',
+          statusCode: 200,
+          metadata: {
+            taskType,
+            responseCount: models.length,
+            topModel,
+            confidence,
+            totalTokens,
+            totalLatencyMs,
+          },
         })
 
         push('final', {
@@ -109,15 +192,21 @@ export async function POST(request: Request) {
           ranking,
           topModel,
           confidence,
-          benchmark: {
-            taskType,
-            evaluatedDimensions: ['accuracy', 'reasoning', 'coherence', 'completeness', 'safety'],
-            responseCount: models.length,
-          },
+          benchmark,
         })
 
         controller.close()
-      } catch {
+      } catch (error) {
+        await logBackendEvent({
+          userEmail,
+          eventType: 'compare_stream_failed',
+          route: '/api/compare/stream',
+          statusCode: 500,
+          metadata: {
+            message: error instanceof Error ? error.message : 'unknown_error',
+          },
+        })
+
         push('error', { message: 'SSE comparison pipeline failed unexpectedly.' })
         controller.close()
       }

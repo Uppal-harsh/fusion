@@ -2,6 +2,14 @@ import 'server-only'
 
 import { Engine, MODEL_PERSONAS, type ModelKey, type TaskType } from '@/lib/engine'
 
+export type ModelResponseTelemetry = {
+  text: string
+  tokensUsed: number
+  latencyMs: number
+  provider: 'openai' | 'anthropic' | 'google' | 'groq' | 'local-fallback'
+  source: 'api' | 'fallback'
+}
+
 type ClientConfig = {
   model: string
   temperature?: number
@@ -54,7 +62,10 @@ async function callOpenAI(query: string, taskType: TaskType) {
 
   if (!response.ok) return null
   const json = await response.json()
-  return json?.choices?.[0]?.message?.content?.trim() || null
+  const text = json?.choices?.[0]?.message?.content?.trim()
+  if (!text) return null
+  const tokensUsed = Number(json?.usage?.total_tokens ?? 0)
+  return { text, tokensUsed }
 }
 
 async function callAnthropic(query: string, taskType: TaskType) {
@@ -84,7 +95,14 @@ async function callAnthropic(query: string, taskType: TaskType) {
 
   if (!response.ok) return null
   const json = await response.json()
-  return json?.content?.[0]?.text?.trim() || null
+  const text = json?.content?.[0]?.text?.trim()
+  if (!text) return null
+  const inputTokens = Number(json?.usage?.input_tokens ?? 0)
+  const outputTokens = Number(json?.usage?.output_tokens ?? 0)
+  return {
+    text,
+    tokensUsed: inputTokens + outputTokens,
+  }
 }
 
 async function callGemini(query: string, taskType: TaskType) {
@@ -117,7 +135,13 @@ async function callGemini(query: string, taskType: TaskType) {
 
   if (!response.ok) return null
   const json = await response.json()
-  return json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null
+  const text = json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim()
+  if (!text) return null
+  const tokensUsed = Number(
+    json?.usageMetadata?.totalTokenCount ??
+      (Number(json?.usageMetadata?.promptTokenCount ?? 0) + Number(json?.usageMetadata?.candidatesTokenCount ?? 0))
+  )
+  return { text, tokensUsed }
 }
 
 async function callGroq(query: string, taskType: TaskType) {
@@ -148,10 +172,15 @@ async function callGroq(query: string, taskType: TaskType) {
 
   if (!response.ok) return null
   const json = await response.json()
-  return json?.choices?.[0]?.message?.content?.trim() || null
+  const text = json?.choices?.[0]?.message?.content?.trim()
+  if (!text) return null
+  const tokensUsed = Number(json?.usage?.total_tokens ?? 0)
+  return { text, tokensUsed }
 }
 
-export async function getModelResponse(modelKey: ModelKey, query: string, taskType: TaskType) {
+export async function getModelResponseWithTelemetry(modelKey: ModelKey, query: string, taskType: TaskType): Promise<ModelResponseTelemetry> {
+  const start = Date.now()
+
   try {
     const external =
       modelKey === 'gpt4'
@@ -162,13 +191,30 @@ export async function getModelResponse(modelKey: ModelKey, query: string, taskTy
             ? await callGemini(query, taskType)
             : await callGroq(query, taskType)
 
-    if (external && external.length > 0) {
-      return external
+    if (external && external.text.length > 0) {
+      return {
+        text: external.text,
+        tokensUsed: Number.isFinite(external.tokensUsed) ? external.tokensUsed : 0,
+        latencyMs: Date.now() - start,
+        provider: modelKey === 'gpt4' ? 'openai' : modelKey === 'claude' ? 'anthropic' : modelKey === 'gemini' ? 'google' : 'groq',
+        source: 'api',
+      }
     }
   } catch {
     // Fall through to local response when provider is unavailable.
   }
 
   const fallback = await Engine.getModelResponse(modelKey, query, taskType)
-  return `${fallback}\n\n[Fallback mode] ${MODEL_PERSONAS[modelKey].name} credentials unavailable or request failed.`
+  return {
+    text: `${fallback}\n\n[Fallback mode] ${MODEL_PERSONAS[modelKey].name} credentials unavailable or request failed.`,
+    tokensUsed: 0,
+    latencyMs: Date.now() - start,
+    provider: 'local-fallback',
+    source: 'fallback',
+  }
+}
+
+export async function getModelResponse(modelKey: ModelKey, query: string, taskType: TaskType) {
+  const result = await getModelResponseWithTelemetry(modelKey, query, taskType)
+  return result.text
 }
