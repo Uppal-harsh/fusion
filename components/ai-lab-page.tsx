@@ -239,7 +239,7 @@ export default function AILabPage() {
                       <h3 className="font-bold text-lg mb-1 tracking-tight">Best Model for Token Conservation</h3>
                       <p className="text-muted-foreground text-sm leading-relaxed">
                         To maximize efficiency using <strong className="text-foreground">{analysis.tokenAnalysis.estimatedInput} input</strong>  & <strong className="text-foreground">{analysis.tokenAnalysis.estimatedOutput} output</strong> tokens, we recommend 
-                        using <strong className="text-primary px-1.5 py-0.5 bg-primary/10 rounded">{analysis.modelInsights[0]?.model || 'Claude 3.5 Sonnet'}</strong>.  
+                        using <strong className="text-primary px-1.5 py-0.5 bg-primary/10 rounded">{analysis.modelInsights[0]?.model || 'Claude 3.7 Sonnet'}</strong>.  
                       </p>
                       <p className="text-xs text-muted-foreground/80 mt-2 font-medium">Efficiency Score: {analysis.tokenAnalysis.efficiencyScore}%</p>
                     </div>

@@ -17,7 +17,7 @@ type ClientConfig = {
 
 const MODEL_CONFIG: Record<ModelKey, ClientConfig> = {
   gpt4: { model: 'gpt-4o-mini', temperature: 0.2 },
-  claude: { model: 'claude-3-5-sonnet-20241022', temperature: 0.2 },
+  claude: { model: 'claude-3-7-sonnet-20250219', temperature: 0.2 },
   gemini: { model: 'gemini-1.5-pro', temperature: 0.2 },
   llama: { model: 'llama-3.3-70b-versatile', temperature: 0.2 },
 }
@@ -38,7 +38,7 @@ const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY
 
 export const OPENROUTER_MODEL_MAP: Record<ModelKey, string> = {
   gpt4: 'openai/gpt-4-turbo',
-  claude: 'anthropic/claude-opus-4',
+  claude: 'anthropic/claude-3.7-sonnet',
   gemini: 'google/gemini-2.5-pro',
   llama: 'meta-llama/llama-3.1-70b-instruct',
 }

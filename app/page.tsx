@@ -8,12 +8,12 @@ import Header from '@/components/header'
 import InputArea from '@/components/input-area'
 import StatsPanel from '@/components/stats-panel'
 import GoogleAuthModal from '@/components/google-auth-modal'
-import RawResponses from '@/components/raw-responses'
-import LandingPage from '@/components/landing-page'
 import HistoryModal from '@/components/history-modal'
+import LandingPage from '@/components/landing-page'
 import AILabPage from '@/components/ai-lab-page'
 import SettingsPage from '@/components/settings-page'
 import ProfilePage from '@/components/profile-page'
+import RawResponses from '@/components/raw-responses'
 import type { HistoryEntry } from '@/lib/server/history-db'
 import {
   type ResponsesByModel,
@@ -100,16 +100,18 @@ export default function Home() {
     }
   }, [isAuthenticated])
 
-  const startNewResearch = () => {
-    setPhase('landing')
+  const startNewResearch = useCallback(() => {
+    setPhase('dashboard')
     setQuery('')
     setResponses(null)
     setScores(null)
-    setSynthesizedAnswer('')
+    setSynthesizedAnswer('Run a prompt to generate a fused answer.')
+    setTopModel('N/A')
+    setConfidence(0)
     setError(null)
-  }
+  }, [])
 
-  const runComparison = async (nextQuery: string, nextTaskType: TaskType) => {
+  const handleRun = async (nextQuery: string, nextTaskType: TaskType) => {
     const trimmedQuery = nextQuery.trim()
     if (isRunning) return
 
@@ -161,7 +163,6 @@ export default function Home() {
       const reader = response.body.getReader()
       let buffer = ''
       let eventName = ''
-
 
       const partialResponses: Partial<ResponsesByModel> = {}
       const partialScores: Partial<ScoresByModel> = {}
@@ -242,15 +243,15 @@ export default function Home() {
 
   return (
     <>
-      <HistoryModal 
-        open={historyOpen} 
-        onOpenChange={setHistoryOpen} 
-        onSelect={restoreHistory} 
+      <HistoryModal
+        open={historyOpen}
+        onOpenChange={setHistoryOpen}
+        onSelect={restoreHistory}
       />
       {/* ── Landing overlay ── */}
       <AnimatePresence>
         {phase === 'landing' && (
-          <LandingPage onSubmit={runComparison} />
+          <LandingPage onSubmit={handleRun} />
         )}
       </AnimatePresence>
 
@@ -261,8 +262,8 @@ export default function Home() {
         animate={{ opacity: phase !== 'landing' ? 1 : 0 }}
         transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
       >
-        <Sidebar 
-          onHistoryClick={() => setHistoryOpen(true)} 
+        <Sidebar
+          onHistoryClick={() => setHistoryOpen(true)}
           onAILabClick={() => setPhase('ailab')}
           onHomeClick={() => setPhase('dashboard')}
           onNewClick={startNewResearch}
@@ -292,12 +293,9 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex-shrink-0 border-t border-border/40">
-                  <InputArea 
-                    onRun={runComparison} 
-                    isRunning={isRunning} 
-                    responses={responses}
-                    isAuthenticated={isAuthenticated}
-                    onRequireLogin={requestLogin}
+                  <InputArea
+                    onRun={handleRun}
+                    isRunning={isRunning}
                   />
                 </div>
               </div>
@@ -315,7 +313,6 @@ export default function Home() {
                   responseCount={responseCount}
                   isRunning={isRunning}
                   error={error}
-                  historyItems={historyItems}
                 />
               </div>
             </div>

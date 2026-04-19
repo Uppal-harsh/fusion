@@ -48,9 +48,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${darkerGrotesque.variable} font-sans antialiased text-foreground bg-background`}>
         <AuthSessionProvider>
-          <ThemeProvider 
-            attribute="class" 
-            defaultTheme="dark" 
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
             enableColorScheme={false}

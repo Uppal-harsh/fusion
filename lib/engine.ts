@@ -20,14 +20,14 @@ function getBaseUrl(): string {
 // Maps the UI's ModelKey to the OpenRouter model ID in the request body
 const MODEL_ID_MAP: Record<ModelKey, string> = {
   gpt4:   'openai/gpt-4-turbo',
-  claude: 'anthropic/claude-opus-4',
+  claude: 'anthropic/claude-3.7-sonnet',
   gemini: 'google/gemini-2.5-pro',
   llama:  'meta-llama/llama-3.1-70b-instruct',
 }
 
 export const MODEL_PERSONAS: Record<ModelKey, { name: string; description: string }> = {
   gpt4:   { name: 'GPT-4 Turbo',         description: 'OpenAI flagship — strong reasoning & coding' },
-  claude: { name: 'Claude Opus 4',       description: 'Anthropic — elite reasoning, peak world knowledge' },
+  claude: { name: 'Claude 3.7 Sonnet', description: 'Anthropic 3.x Sonnet — strong reasoning & coding' },
   gemini: { name: 'Gemini 2.5 Pro',      description: 'Google — multimodal powerhouse' },
   llama:  { name: 'Llama 3.1 70B',       description: 'Meta — fast & efficient' },
 }

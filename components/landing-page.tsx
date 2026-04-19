@@ -16,7 +16,7 @@ import {
 
 const MODEL_DESCRIPTIONS: Record<string, string> = {
   'GPT-4o': 'OpenAI flagship — strong reasoning & coding',
-  'Claude 3.5 Sonnet': 'Anthropic — elite reasoning, peak world knowledge',
+  'Claude 3.7 Sonnet': 'Anthropic 3.x Sonnet tier',
   'Gemini 2.5 Pro': 'Google — multimodal powerhouse',
   'Ollama 3': 'Local-first / Meta — fast & efficient'
 }
@@ -191,7 +191,7 @@ export default function LandingPage({ onSubmit }: Props) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.5 }}
         >
-          {['GPT-4o', 'Claude 3.5 Sonnet', 'Gemini 2.5 Pro', 'Ollama 3'].map((m) => (
+          {['GPT-4o', 'Claude 3.7 Sonnet', 'Gemini 2.5 Pro', 'Ollama 3'].map((m) => (
             <Tooltip key={m}>
               <TooltipTrigger asChild>
                 <span className="cursor-help text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 px-2.5 py-1 rounded-lg bg-muted/30 border border-border/30 hover:bg-muted/50 transition-colors">

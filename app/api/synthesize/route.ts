@@ -240,7 +240,7 @@ Return ONLY valid JSON — no markdown fences, no preamble:
 const MODEL_DISPLAY_NAMES: Record<string, string> = {
   'openai/gpt-4o': 'GPT-4o',
   'openai/gpt-4-turbo': 'GPT-4 Turbo',
-  'anthropic/claude-opus-4': 'Claude Opus 4',
+  'anthropic/claude-3.7-sonnet': 'Claude 3.7 Sonnet',
   'google/gemini-2.5-pro': 'Gemini 2.5 Pro',
   'meta-llama/llama-3.1-70b-instruct': 'Llama 3.1 70B',
 };

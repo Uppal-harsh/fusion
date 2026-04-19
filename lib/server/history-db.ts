@@ -1,8 +1,9 @@
-import { supabase } from '@/lib/supabase'
-import type { ModelKey, ScoresByModel, TaskType, ResponsesByModel } from '@/lib/engine'
+import 'server-only'
+
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+import type { ModelKey, ResponsesByModel, ScoresByModel, TaskType } from '@/lib/engine'
 import { getSupabaseAdmin } from '@/lib/server/supabase'
-import path from 'path'
-import { mkdir, readFile, writeFile } from 'fs/promises'
 
 export type HistoryRankingItem = {
   modelKey: ModelKey
@@ -40,10 +41,10 @@ export type HistoryEntry = {
   topModel: string
   confidence: number
   synthesizedAnswer: string
-  responses?: ResponsesByModel
   scores: ScoresByModel
   ranking?: HistoryRankingItem[]
   benchmark: HistoryBenchmark
+  responses?: ResponsesByModel
 }
 
 export type UserSettings = {
@@ -79,7 +80,6 @@ type HistoryDb = {
   items: HistoryEntry[]
 }
 
-
 type SupabaseHistoryRow = {
   id: string
   created_at: string
@@ -94,6 +94,25 @@ type SupabaseHistoryRow = {
   scores: ScoresByModel
   benchmark: HistoryBenchmark | null
 }
+
+type AddHistoryInput =
+  | Omit<HistoryEntry, 'id' | 'createdAt'>
+  | {
+      userEmail?: string
+      user_email?: string
+      query?: string
+      taskType?: TaskType
+      task_type?: TaskType
+      topModel?: string
+      top_model?: string
+      confidence?: number
+      synthesizedAnswer?: string
+      synthesized_answer?: string
+      ranking?: HistoryRankingItem[]
+      scores?: ScoresByModel
+      benchmark?: HistoryBenchmark
+      responses?: ResponsesByModel
+    }
 
 const DEFAULT_BENCHMARK_DIMENSIONS = ['accuracy', 'reasoning', 'coherence', 'completeness', 'safety']
 
@@ -154,6 +173,33 @@ function sanitizeSettings(settings: Partial<UserSettings> | null | undefined): U
   }
 }
 
+function normalizeHistoryInput(entry: AddHistoryInput): Omit<HistoryEntry, 'id' | 'createdAt'> {
+  const taskType = normalizeTaskType('taskType' in entry ? entry.taskType : entry.task_type)
+  const responses = ('responses' in entry ? entry.responses : undefined) as ResponsesByModel | undefined
+
+  return {
+    userEmail: ('userEmail' in entry ? entry.userEmail : undefined) ?? ('user_email' in entry ? entry.user_email : undefined),
+    query: (('query' in entry ? entry.query : '') ?? '').toString(),
+    taskType,
+    topModel: (('topModel' in entry ? entry.topModel : undefined) ?? ('top_model' in entry ? entry.top_model : 'N/A') ?? 'N/A').toString(),
+    confidence: Number(('confidence' in entry ? entry.confidence : 0) ?? 0),
+    synthesizedAnswer:
+      (('synthesizedAnswer' in entry ? entry.synthesizedAnswer : undefined) ??
+        ('synthesized_answer' in entry ? entry.synthesized_answer : '') ??
+        '')
+        .toString(),
+    ranking: (('ranking' in entry ? entry.ranking : undefined) as HistoryRankingItem[] | undefined) ?? [],
+    scores: (('scores' in entry ? entry.scores : undefined) as ScoresByModel | undefined) ?? ({} as ScoresByModel),
+    benchmark:
+      (('benchmark' in entry ? entry.benchmark : undefined) as HistoryBenchmark | undefined) ??
+      {
+        ...getFallbackBenchmark(taskType),
+        responseCount: responses ? Object.keys(responses).length : 0,
+      },
+    responses,
+  }
+}
+
 async function ensureDb() {
   await mkdir(DATA_DIR, { recursive: true })
   try {
@@ -184,20 +230,22 @@ async function writeDb(db: HistoryDb) {
   await writeFile(DB_FILE, JSON.stringify(db, null, 2), 'utf8')
 }
 
-export async function addHistoryEntry(entry: Omit<HistoryEntry, 'id' | 'createdAt'>) {
+export async function addHistoryEntry(entry: AddHistoryInput) {
+  const normalizedEntry = normalizeHistoryInput(entry)
   const supabase = getSupabaseAdmin()
-  if (supabase && entry.userEmail) {
+
+  if (supabase && normalizedEntry.userEmail) {
     const payload = {
-      user_email: entry.userEmail,
-      query: entry.query,
-      task_type: entry.taskType,
-      top_model: entry.topModel,
-      confidence: entry.confidence,
-      synthesized_answer: entry.synthesizedAnswer,
-      ranking: entry.ranking,
-      responses: entry.responses,
-      scores: entry.scores,
-      benchmark: entry.benchmark,
+      user_email: normalizedEntry.userEmail,
+      query: normalizedEntry.query,
+      task_type: normalizedEntry.taskType,
+      top_model: normalizedEntry.topModel,
+      confidence: normalizedEntry.confidence,
+      synthesized_answer: normalizedEntry.synthesizedAnswer,
+      ranking: normalizedEntry.ranking,
+      responses: normalizedEntry.responses,
+      scores: normalizedEntry.scores,
+      benchmark: normalizedEntry.benchmark,
     }
 
     const { data, error } = await supabase
@@ -217,8 +265,7 @@ export async function addHistoryEntry(entry: Omit<HistoryEntry, 'id' | 'createdA
   const next: HistoryEntry = {
     id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     createdAt: new Date().toISOString(),
-    ...entry,
-    benchmark: entry.benchmark ?? getFallbackBenchmark(entry.taskType),
+    ...normalizedEntry,
   }
   db.items.unshift(next)
   if (db.items.length > 300) {

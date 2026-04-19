@@ -1,6 +1,292 @@
 {
   "items": [
     {
+      "id": "1776576481698-32b2le",
+      "createdAt": "2026-04-19T05:28:01.698Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "hello",
+      "taskType": "general",
+      "topModel": "GPT-4 Turbo",
+      "confidence": 100,
+      "synthesizedAnswer": "Hello! How can I help you today?",
+      "ranking": [
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "claude": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "gemini": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 60,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "llama": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 715,
+        "totalLatencyMs": 10974,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 56,
+            "latencyMs": 2130,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 64,
+            "latencyMs": 906,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 534,
+            "latencyMs": 6705,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 61,
+            "latencyMs": 1233,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Hello! How can I assist you today?",
+        "claude": "Hello! How can I help you today?",
+        "gemini": "Hello. How can I help you?",
+        "llama": "Hello. How can I assist you today?"
+      }
+    },
+    {
+      "id": "1776576143097-doi8xf",
+      "createdAt": "2026-04-19T05:22:23.097Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "hello",
+      "taskType": "general",
+      "topModel": "Claude Opus 4",
+      "confidence": 91,
+      "synthesizedAnswer": "Hello! How can I assist you today?",
+      "ranking": [
+        {
+          "modelKey": "claude",
+          "model": "Claude Opus 4",
+          "overall": 69,
+          "grounding": 50,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 87
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 96
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 96
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 96
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 96,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "claude": {
+          "accuracy": 62,
+          "reasoning": 76,
+          "coherence": 69,
+          "grounding": 50,
+          "hallucination_risk": "low",
+          "consensus_score": 87,
+          "key_claims": [
+            "Error 402: {\"modelId\":\"anthropic/claude-opus-4\",\"content\":\"This request requires"
+          ],
+          "_overall": 69
+        },
+        "gemini": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 60,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 96,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "llama": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 96,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 651,
+        "totalLatencyMs": 10945,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 56,
+            "latencyMs": 1999,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 0,
+            "latencyMs": 401,
+            "provider": "local-fallback",
+            "source": "fallback"
+          },
+          "gemini": {
+            "tokensUsed": 534,
+            "latencyMs": 6372,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 61,
+            "latencyMs": 2173,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Hello! How can I assist you today?",
+        "claude": "Error 402: {\"modelId\":\"anthropic/claude-opus-4\",\"content\":\"This request requires more credits, or fewer max_tokens. You requested up to 512 tokens, but can only afford 354. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"tokensUsed\":0,\"latencyMs\":41,\"error\":\"This request requires more credits, or fewer max_tokens. You requested up to 512 tokens, but can only afford 354. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\"}\n\n[Fallback mode] OpenRouter request failed or key missing.",
+        "gemini": "Hello. How can I help you?",
+        "llama": "Hello. How can I assist you today?"
+      }
+    },
+    {
       "id": "1776573485763-gpg53m",
       "createdAt": "2026-04-19T04:38:05.763Z",
       "userEmail": "admin@fusion.ai",
