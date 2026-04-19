@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Darker_Grotesque } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import AuthSessionProvider from '@/components/auth-session-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import './globals.css'
@@ -46,17 +47,19 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${darkerGrotesque.variable} font-sans antialiased text-foreground bg-background`}>
-        <ThemeProvider 
-          attribute="class" 
-          defaultTheme="dark" 
-          enableSystem
-          disableTransitionOnChange
-          enableColorScheme={false}
-        >
-          <TooltipProvider delayDuration={300}>
-            {children}
-          </TooltipProvider>
-        </ThemeProvider>
+        <AuthSessionProvider>
+          <ThemeProvider 
+            attribute="class" 
+            defaultTheme="dark" 
+            enableSystem
+            disableTransitionOnChange
+            enableColorScheme={false}
+          >
+            <TooltipProvider delayDuration={300}>
+              {children}
+            </TooltipProvider>
+          </ThemeProvider>
+        </AuthSessionProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

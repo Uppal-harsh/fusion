@@ -15,15 +15,15 @@ import Image from 'next/image'
 
 type AppPhase = 'landing' | 'dashboard' | 'ailab' | 'settings' | 'profile'
 
-export default function Sidebar({ 
-  onHistoryClick, 
-  onAILabClick, 
-  onHomeClick, 
-  onNewClick, 
-  onSettingsClick, 
+export default function Sidebar({
+  onHistoryClick,
+  onAILabClick,
+  onHomeClick,
+  onNewClick,
+  onSettingsClick,
   onProfileClick,
   activePhase
-}: { 
+}: {
   onHistoryClick?: () => void
   onAILabClick?: () => void
   onHomeClick?: () => void
@@ -88,7 +88,7 @@ export default function Sidebar({
 
       {/* New Research */}
       <div className="p-3">
-        <button 
+        <button
           onClick={onNewClick}
           className={`w-full flex items-center justify-center p-3 rounded-2xl bg-muted/50 hover:bg-muted text-foreground transition-all duration-300 shadow-sm border border-border/40 hover:border-border group`}
         >
@@ -137,8 +137,8 @@ export default function Sidebar({
 
       {/* User / Profile */}
       <div className="p-3 border-t border-sidebar-border/60 bg-sidebar-accent/10">
-        <button 
-          className={getRowClass(activePhase === 'profile')} 
+        <button
+          className={getRowClass(activePhase === 'profile')}
           onClick={onProfileClick}
         >
           <div className="w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 border border-primary/10 shadow-sm shadow-primary/5">

@@ -1,17 +1,12 @@
 import { NextResponse } from 'next/server'
-import { getHistory } from '@/lib/server/history-db'
 import { auth } from '@/auth'
-import { logBackendEvent } from '@/lib/server/event-log'
+import { getUserBackendEvents, logBackendEvent } from '@/lib/server/event-log'
+
+export const runtime = 'nodejs'
 
 export async function GET(request: Request) {
   const session = await auth()
   if (!session?.user?.email) {
-    await logBackendEvent({
-      eventType: 'history_unauthorized',
-      route: '/api/history',
-      statusCode: 401,
-    })
-
     return NextResponse.json(
       {
         error: 'Unauthorized. Please sign in with Google.',
@@ -20,15 +15,16 @@ export async function GET(request: Request) {
     )
   }
 
-  const url = new URL(request.url)
-  const limit = Number(url.searchParams.get('limit') || '20')
   const userEmail = session.user.email.trim().toLowerCase()
-  const items = await getHistory(limit, userEmail)
+  const url = new URL(request.url)
+  const limit = Number(url.searchParams.get('limit') || '25')
+
+  const items = await getUserBackendEvents(userEmail, limit)
 
   await logBackendEvent({
     userEmail,
-    eventType: 'history_viewed',
-    route: '/api/history',
+    eventType: 'user_activity_viewed',
+    route: '/api/user/activity',
     statusCode: 200,
     metadata: {
       limit,

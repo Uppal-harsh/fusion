@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { Engine, MODEL_PERSONAS, type ModelKey, type ResponsesByModel, type ScoresByModel, type TaskType } from '@/lib/engine'
-import { getModelResponse } from '@/lib/server/model-clients'
+import { getModelResponseWithTelemetry } from '@/lib/server/model-clients'
 import { addHistoryEntry, type HistoryRankingItem } from '@/lib/server/history-db'
 
 export const MODEL_KEYS = Object.keys(MODEL_PERSONAS) as ModelKey[]
@@ -19,20 +19,39 @@ export type CompareResult = {
     taskType: TaskType
     evaluatedDimensions: string[]
     responseCount: number
+    totalTokens: number
+    totalLatencyMs: number
+    modelTelemetry: Record<string, { tokensUsed: number; latencyMs: number; provider: string; source: 'api' | 'fallback' }>
   }
 }
 
-export async function runCompare(query: string, taskType: TaskType, selectedModels?: ModelKey[]) {
+export async function runCompare(query: string, taskType: TaskType, selectedModels?: ModelKey[], userEmail?: string) {
   const models = selectedModels?.length ? selectedModels : MODEL_KEYS
 
-  const responseEntries = await Promise.all(
+  const telemetryEntries = await Promise.all(
     models.map(async (modelKey) => {
-      const responseText = await getModelResponse(modelKey, query, taskType)
-      return [modelKey, responseText] as const
+      const telemetry = await getModelResponseWithTelemetry(modelKey, query, taskType)
+      return [modelKey, telemetry] as const
     })
   )
 
+  const responseEntries = telemetryEntries.map(([modelKey, telemetry]) => [modelKey, telemetry.text] as const)
   const responses = Object.fromEntries(responseEntries) as ResponsesByModel
+
+  const modelTelemetry = Object.fromEntries(
+    telemetryEntries.map(([modelKey, telemetry]) => [
+      modelKey,
+      {
+        tokensUsed: telemetry.tokensUsed,
+        latencyMs: telemetry.latencyMs,
+        provider: telemetry.provider,
+        source: telemetry.source,
+      },
+    ])
+  ) as Record<string, { tokensUsed: number; latencyMs: number; provider: string; source: 'api' | 'fallback' }>
+
+  const totalTokens = telemetryEntries.reduce((sum, [, telemetry]) => sum + telemetry.tokensUsed, 0)
+  const totalLatencyMs = telemetryEntries.reduce((sum, [, telemetry]) => sum + telemetry.latencyMs, 0)
 
   const scoreEntries = await Promise.all(
     models.map(async (modelKey) => {
@@ -74,10 +93,14 @@ export async function runCompare(query: string, taskType: TaskType, selectedMode
       taskType,
       evaluatedDimensions: ['accuracy', 'reasoning', 'coherence', 'completeness', 'safety'],
       responseCount: models.length,
+      totalTokens,
+      totalLatencyMs,
+      modelTelemetry,
     },
   }
 
   await addHistoryEntry({
+    userEmail,
     query,
     taskType,
     topModel,
@@ -85,6 +108,7 @@ export async function runCompare(query: string, taskType: TaskType, selectedMode
     synthesizedAnswer,
     ranking,
     scores,
+    benchmark: result.benchmark,
   })
 
   return result

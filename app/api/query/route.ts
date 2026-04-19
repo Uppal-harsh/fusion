@@ -4,6 +4,8 @@
 import { OpenRouter } from "@openrouter/sdk";
 import { NextRequest, NextResponse } from "next/server";
 import type { ModelId, TaskProfile } from "@/lib/types";
+import { auth } from '@/auth'
+import { logBackendEvent } from '@/lib/server/event-log'
 
 // ─── OpenRouter model identifiers ─────────────────────────────────
 const OPENROUTER_MODELS: Record<ModelId, string> = {
@@ -32,6 +34,20 @@ function systemPromptForTask(task: TaskProfile): string {
 
 
 export async function POST(req: NextRequest) {
+  const session = await auth()
+  if (!session?.user) {
+    await logBackendEvent({
+      eventType: 'query_unauthorized',
+      route: '/api/query',
+      statusCode: 401,
+    })
+
+    return NextResponse.json(
+      { error: 'Unauthorized. Please sign in with Google.' },
+      { status: 401 }
+    )
+  }
+
   const {
     modelId,
     prompt,
@@ -39,8 +55,17 @@ export async function POST(req: NextRequest) {
   }: { modelId: ModelId; prompt: string; taskProfile: TaskProfile } =
     await req.json();
 
+  const userEmail = session.user.email?.trim().toLowerCase()
+
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
+    await logBackendEvent({
+      userEmail,
+      eventType: 'query_provider_not_configured',
+      route: '/api/query',
+      statusCode: 500,
+    })
+
     return NextResponse.json(
       { error: "OPENROUTER_API_KEY not set" },
       { status: 500 }
@@ -53,6 +78,14 @@ export async function POST(req: NextRequest) {
 
   const openRouterModel = OPENROUTER_MODELS[modelId];
   if (!openRouterModel) {
+    await logBackendEvent({
+      userEmail,
+      eventType: 'query_invalid_model',
+      route: '/api/query',
+      statusCode: 400,
+      metadata: { modelId },
+    })
+
     return NextResponse.json(
       { error: `Unknown modelId: ${modelId}` },
       { status: 400 }
@@ -76,6 +109,19 @@ export async function POST(req: NextRequest) {
     const content = response.choices[0]?.message?.content ?? "";
     const tokensUsed = response.usage?.totalTokens ?? 0;
 
+    await logBackendEvent({
+      userEmail,
+      eventType: 'query_completed',
+      route: '/api/query',
+      statusCode: 200,
+      metadata: {
+        modelId,
+        taskProfile,
+        tokensUsed,
+        latencyMs: Date.now() - start,
+      },
+    })
+
     return NextResponse.json({
       modelId,
       content,
@@ -83,6 +129,18 @@ export async function POST(req: NextRequest) {
       latencyMs: Date.now() - start,
     });
   } catch (err: unknown) {
+    await logBackendEvent({
+      userEmail,
+      eventType: 'query_failed',
+      route: '/api/query',
+      statusCode: 500,
+      metadata: {
+        modelId,
+        taskProfile,
+        message: err instanceof Error ? err.message : 'Unknown error',
+      },
+    })
+
     return NextResponse.json(
       {
         modelId,
