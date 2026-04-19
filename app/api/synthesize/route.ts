@@ -175,7 +175,7 @@ Return ONLY valid JSON — no markdown fences, no preamble:
   const response = await openrouter.chat.send({
     chatRequest: {
       model: "openai/gpt-4o",
-      maxTokens: 1024,
+      maxTokens: 500,
       messages: [{ role: "user", content: judgePrompt }],
     },
   });

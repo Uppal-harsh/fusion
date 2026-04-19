@@ -1,7 +1,11 @@
 'use client'
-import { useMemo, useState } from 'react'
-import { TrendingUp, CheckCircle, AlertCircle, BarChart3, LineChart } from 'lucide-react'
+import { useMemo, useState, useEffect } from 'react'
+import { TrendingUp, CheckCircle, AlertCircle, BarChart3, LineChart as LucideLineChart } from 'lucide-react'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts'
 import { Engine, MODEL_PERSONAS, type ModelKey, type ResponsesByModel, type ScoresByModel, type TaskType } from '@/lib/engine'
+import ShinyText from './ui/shiny-text'
+
+const LOADING_STEPS = ["Generating answer...", "Comparing answers...", "Analysing..."]
 
 type StatsPanelProps = {
   query: string
@@ -58,6 +62,17 @@ export default function StatsPanel({
   const selectedResponse = selectedModelKey && responses ? responses[selectedModelKey] : ''
   const selectedScore = selectedModelKey && scores ? scores[selectedModelKey] : null
 
+  const [loadingIndex, setLoadingIndex] = useState(0)
+
+  // Cycle through loading steps
+  useEffect(() => {
+    if (!isRunning) return
+    const interval = setInterval(() => {
+      setLoadingIndex((prev) => (prev + 1) % LOADING_STEPS.length)
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [isRunning])
+
   const stats = [
     { label: 'Avg Quality', value: `${avgQuality}%`, icon: TrendingUp, color: 'text-primary' },
     { label: 'Consensus', value: `${consensus}%`, icon: CheckCircle, color: 'text-foreground' },
@@ -84,6 +99,12 @@ export default function StatsPanel({
 
   const answerLines = synthesizedAnswer.split('\n').filter((line) => line.trim())
 
+  const modelNames = (Object.keys(MODEL_PERSONAS) as ModelKey[]).map(k => MODEL_PERSONAS[k].name)
+  const trendLineData = qualityTrend.map((score, i) => ({
+    model: modelNames[i] ? modelNames[i].split(' ')[0] : `M${i + 1}`,
+    score,
+  }))
+
   return (
     <div className="h-full min-h-0 flex flex-col gap-3 p-3 md:gap-4 md:p-6 overflow-hidden bg-background">
       {/* Top Section - Stats/Visualization/Benchmark - 65% */}
@@ -91,7 +112,7 @@ export default function StatsPanel({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-1.5 rounded-lg bg-primary/10">
-              <LineChart className="w-4 h-4 text-primary" />
+              <LucideLineChart className="w-4 h-4 text-primary" />
             </div>
             <h3 className="text-sm font-bold text-foreground tracking-tight">Performance Metrics & Benchmark</h3>
           </div>
@@ -123,18 +144,45 @@ export default function StatsPanel({
             <div className="w-full inline-flex items-center justify-center px-2 py-1.5 rounded-xl bg-primary/8 border border-primary/15">
               <p className="text-[10px] font-bold text-primary uppercase tracking-widest">Benchmark Trend</p>
             </div>
-            <div className="flex-1 flex items-end justify-center gap-2 py-3 min-h-0">
-              {qualityTrend.map((height, idx) => (
-                <div
-                  key={idx}
-                  className="flex-1 h-full rounded-t-xl bg-primary/50 hover:bg-primary/70 transition-all duration-300 cursor-pointer group relative"
-                  style={{ height: `${height}%`, minHeight: '20px' }}
+            <div className="flex-1 min-h-0">
+              <ResponsiveContainer width="100%" height={120}>
+                <LineChart
+                  data={trendLineData}
+                  margin={{ top: 8, right: 8, left: -28, bottom: 0 }}
                 >
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-card border border-border rounded-lg px-2 py-1 text-[10px] font-semibold text-foreground opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-sm">
-                    {height}%
-                  </div>
-                </div>
-              ))}
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                  <XAxis
+                    dataKey="model"
+                    tick={{ fill: 'var(--muted-foreground)', fontSize: 10 }}
+                    axisLine={false}
+                    tickLine={false}
+                  />
+                  <YAxis
+                    domain={[0, 100]}
+                    tick={{ fill: 'var(--muted-foreground)', fontSize: 10 }}
+                    axisLine={false}
+                    tickLine={false}
+                  />
+                  <ReferenceLine y={75} stroke="var(--border)" strokeDasharray="4 2" />
+                  <Tooltip
+                    contentStyle={{
+                      background: 'var(--card)',
+                      border: '1px solid var(--border)',
+                      borderRadius: 8,
+                      fontSize: 11,
+                    }}
+                    formatter={(v: number) => [`${v}%`, 'Score']}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="score"
+                    stroke="#f59e0b"
+                    strokeWidth={2.5}
+                    dot={{ fill: '#f59e0b', r: 4, strokeWidth: 0 }}
+                    activeDot={{ r: 6, fill: '#f59e0b', stroke: 'var(--card)', strokeWidth: 2 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
           </div>
 
@@ -194,6 +242,19 @@ export default function StatsPanel({
         <div className="flex-1 flex flex-col gap-3 overflow-y-auto min-h-0">
           {error ? (
             <p className="text-sm text-destructive leading-relaxed">{error}</p>
+          ) : isRunning ? (
+            <div className="flex flex-col gap-2 pt-2">
+              <ShinyText 
+                text={LOADING_STEPS[loadingIndex]} 
+                speed={1.5} 
+                color="oklch(0.60 0.01 60)" 
+                shineColor="oklch(0.78 0.13 75)"
+                className="text-lg font-bold tracking-tight"
+              />
+              <p className="text-[11px] text-muted-foreground/60 italic animate-pulse">
+                Merging inputs from {responseCount || 4} models...
+              </p>
+            </div>
           ) : (
             answerLines.map((line, idx) => (
               <p key={`${line}-${idx}`} className="text-sm text-foreground leading-relaxed">

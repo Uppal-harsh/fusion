@@ -1,6 +1,5 @@
 // components/charts.tsx
 // ─── Recharts components — wired to SynthesisResult.chartData ─────
-// Drop these into your stats-panel.tsx
 
 "use client";
 
@@ -10,14 +9,15 @@ import {
   PolarGrid,
   PolarAngleAxis,
   PolarRadiusAxis,
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
+  ReferenceLine,
 } from "recharts";
 import type { ChartDataPoint } from "@/lib/types";
 
@@ -35,7 +35,6 @@ interface QualityRadarProps {
 }
 
 export function QualityRadarChart({ data }: QualityRadarProps) {
-  // Recharts RadarChart expects [{dimension, GPT-4o, Claude, ...}] format
   const dimensions = ["accuracy", "reasoning", "coherence", "grounding"] as const;
 
   const radarData = dimensions.map((dim) => {
@@ -88,23 +87,33 @@ export function QualityRadarChart({ data }: QualityRadarProps) {
   );
 }
 
-// ─── Bar chart: latency comparison ───────────────────────────────
+// ─── Line chart: latency comparison ─────────────────────────────
 interface LatencyBarProps {
   data: ChartDataPoint[];
 }
 
 export function LatencyBarChart({ data }: LatencyBarProps) {
+  // Transpose data: LineChart needs per-metric rows with model columns
+  const lineData = data.map((d) => ({
+    model: d.model,
+    latency: d.latency,
+  }));
+
   return (
     <ResponsiveContainer width="100%" height={200}>
-      <BarChart data={data} margin={{ top: 4, right: 16, left: 0, bottom: 4 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+      <LineChart data={lineData} margin={{ top: 8, right: 16, left: 0, bottom: 4 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
         <XAxis
           dataKey="model"
           tick={{ fill: "var(--muted-foreground)", fontSize: 12 }}
+          axisLine={false}
+          tickLine={false}
         />
         <YAxis
           unit="ms"
           tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
+          axisLine={false}
+          tickLine={false}
         />
         <Tooltip
           contentStyle={{
@@ -115,18 +124,20 @@ export function LatencyBarChart({ data }: LatencyBarProps) {
           }}
           formatter={(v: number) => [`${v} ms`, "Latency"]}
         />
-        <Bar
+        <Line
+          type="monotone"
           dataKey="latency"
-          radius={[4, 4, 0, 0]}
-          fill="#f59e0b"
-          opacity={0.85}
+          stroke="#f59e0b"
+          strokeWidth={2.5}
+          dot={{ fill: "#f59e0b", r: 5, strokeWidth: 0 }}
+          activeDot={{ r: 7, fill: "#f59e0b", stroke: "var(--card)", strokeWidth: 2 }}
         />
-      </BarChart>
+      </LineChart>
     </ResponsiveContainer>
   );
 }
 
-// ─── Bar chart: overall scores (consensus ranking) ────────────────
+// ─── Line chart: overall scores across models ────────────────────
 interface ScoreBarProps {
   data: ChartDataPoint[];
 }
@@ -136,23 +147,24 @@ export function ScoreBarChart({ data }: ScoreBarProps) {
 
   return (
     <ResponsiveContainer width="100%" height={200}>
-      <BarChart
+      <LineChart
         data={sorted}
-        layout="vertical"
-        margin={{ top: 4, right: 24, left: 0, bottom: 4 }}
+        margin={{ top: 8, right: 16, left: 0, bottom: 4 }}
       >
-        <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" horizontal={false} />
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
         <XAxis
-          type="number"
-          domain={[0, 100]}
-          tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
+          dataKey="model"
+          tick={{ fill: "var(--muted-foreground)", fontSize: 12 }}
+          axisLine={false}
+          tickLine={false}
         />
         <YAxis
-          type="category"
-          dataKey="model"
-          width={72}
-          tick={{ fill: "var(--muted-foreground)", fontSize: 12 }}
+          domain={[0, 100]}
+          tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
+          axisLine={false}
+          tickLine={false}
         />
+        <ReferenceLine y={75} stroke="var(--border)" strokeDasharray="4 2" label={{ value: "75", fill: "var(--muted-foreground)", fontSize: 10 }} />
         <Tooltip
           contentStyle={{
             background: "var(--card)",
@@ -162,13 +174,25 @@ export function ScoreBarChart({ data }: ScoreBarProps) {
           }}
           formatter={(v: number) => [v, "Overall Score"]}
         />
-        <Bar
+        <Line
+          type="monotone"
           dataKey="overall"
-          radius={[0, 4, 4, 0]}
-          fill="#f59e0b"
-          opacity={0.85}
+          stroke="#f59e0b"
+          strokeWidth={2.5}
+          dot={({ cx, cy, payload }) => (
+            <circle
+              key={payload.model}
+              cx={cx}
+              cy={cy}
+              r={5}
+              fill={MODEL_COLORS[payload.model] ?? "#f59e0b"}
+              stroke="var(--card)"
+              strokeWidth={2}
+            />
+          )}
+          activeDot={{ r: 7, stroke: "var(--card)", strokeWidth: 2 }}
         />
-      </BarChart>
+      </LineChart>
     </ResponsiveContainer>
   );
 }

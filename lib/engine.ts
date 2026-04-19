@@ -11,16 +11,16 @@ export type ModelKey = 'gpt4' | 'claude' | 'gemini' | 'llama'
 // Maps the UI's ModelKey to the OpenRouter model ID in the request body
 const MODEL_ID_MAP: Record<ModelKey, string> = {
   gpt4:   'gpt-4o',
-  claude: 'claude-3-5-sonnet',
+  claude: 'anthropic/claude-sonnet-3.5',
   gemini: 'gemini-2-5-pro',
-  llama:  'llama-3',
+  llama:  'llama-3-8b',
 }
 
 export const MODEL_PERSONAS: Record<ModelKey, { name: string; description: string }> = {
   gpt4:   { name: 'GPT-4o',           description: 'OpenAI flagship — strong reasoning & coding' },
-  claude: { name: 'Claude 3.5 Sonnet', description: 'Anthropic — nuanced, thoughtful, low hallucination' },
-  gemini: { name: 'Gemini 2.5 Pro',    description: 'Google — multimodal, strong grounding' },
-  llama:  { name: 'Llama 3',           description: 'Meta — fast open-source, good general use' },
+  claude: { name: 'Claude 3.5 Sonnet',  description: 'Anthropic — elite reasoning, peak world knowledge' },
+  gemini: { name: 'Gemini 2.5 Pro',    description: 'Google — multimodal powerhouse' },
+  llama:  { name: 'Ollama 3',          description: 'Local-first / Meta — fast & efficient' },
 }
 
 // ─── Score shape per model ─────────────────────────────────────────
@@ -46,9 +46,6 @@ const TASK_WEIGHTS: Record<TaskType, Record<string, number>> = {
   reasoning: { accuracy: 0.20, reasoning: 0.40, coherence: 0.20, grounding: 0.10, hallucination: 0.10 },
   creative:  { accuracy: 0.10, reasoning: 0.10, coherence: 0.40, grounding: 0.10, hallucination: 0.30 },
 }
-
-// Simple in-memory history store
-const _history: Array<{ query: string; taskType: TaskType; winner: string; confidence: number; ts: number }> = []
 
 // ─── Engine namespace (class-like static API) ─────────────────────
 export const Engine = {
@@ -193,17 +190,42 @@ export const Engine = {
   },
 
   // ── 7. addToHistory ───────────────────────────────────────────
-  addToHistory(
+  async addToHistory(
     query: string,
     taskType: TaskType,
     winner: string,
-    confidence: number
-  ): void {
-    _history.unshift({ query, taskType, winner, confidence, ts: Date.now() })
-    if (_history.length > 50) _history.pop()
+    confidence: number,
+    synthesizedAnswer: string,
+    responses: ResponsesByModel,
+    scores: ScoresByModel
+  ): Promise<void> {
+    try {
+      await fetch('/api/history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query,
+          task_type: taskType,
+          top_model: winner,
+          confidence,
+          synthesized_answer: synthesizedAnswer,
+          responses,
+          scores
+        }),
+      })
+    } catch (err) {
+      console.error('Failed to add to remote history:', err)
+    }
   },
 
-  getHistory() {
-    return _history
+  async getHistory(limit = 20) {
+    try {
+      const res = await fetch(`/api/history?limit=${limit}`)
+      if (!res.ok) return []
+      return await res.json()
+    } catch (err) {
+      console.error('Failed to fetch history:', err)
+      return []
+    }
   },
 }
