@@ -338,4 +338,5 @@ npm start
 - If editor shows CSS warnings for @apply, @theme, or @custom-variant, but npm run build passes, this is typically editor tooling mismatch rather than runtime failure.
 - If Supabase env variables are missing, Fusion falls back to local file history storage.
 #   f u s i o n - 2  
+ #   f u s i o n - 2  
  
