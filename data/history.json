@@ -1,6 +1,1865 @@
 {
   "items": [
     {
+      "id": "1776616198706-dthoy2",
+      "createdAt": "2026-04-19T16:29:58.706Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "explain the case of gluckstein vs barnes",
+      "taskType": "general",
+      "topModel": "Llama 3.1 70B",
+      "confidence": 91,
+      "synthesizedAnswer": "The case of Gluckstein v. Barnes (1900) is a notable English legal case concerning company law, specifically dealing with the duties and liabilities of directors during the process of company promotion. The case involved the sale and purchase of a company, where the directors of the purchasing company failed to disclose to the shareholders that they had received a financial benefit from the transaction.\n\nThe key issue in the case was whether the directors had breached their fiduciary duty by not disclosing their personal profits to the shareholders of the company. The court held that the directors had indeed breached their duty by failing to disclose their secret profits. The ruling emphasized that directors have a duty to act in the best interests of the company and its shareholders, and this includes an obligation to disclose any personal financial gains arising from transactions involving the company.\n\nThis case is significant in corporate law as it underscores the importance of transparency and the fiduciary duties of directors to their company and its shareholders.",
+      "ranking": [
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 78,
+          "grounding": 79,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 93
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 77,
+          "grounding": 79,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 95
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 75,
+          "grounding": 77,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 98
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 64,
+          "grounding": 70,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 86
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 79,
+          "reasoning": 61,
+          "coherence": 78,
+          "grounding": 79,
+          "hallucination_risk": "low",
+          "consensus_score": 95,
+          "key_claims": [
+            "The case of Gluckstein v"
+          ],
+          "_overall": 77
+        },
+        "claude": {
+          "accuracy": 76,
+          "reasoning": 59,
+          "coherence": 75,
+          "grounding": 77,
+          "hallucination_risk": "low",
+          "consensus_score": 98,
+          "key_claims": [
+            "# Gluckstein v"
+          ],
+          "_overall": 75
+        },
+        "gemini": {
+          "accuracy": 66,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 70,
+          "hallucination_risk": "medium",
+          "consensus_score": 86,
+          "key_claims": [
+            "*Gluckstein v Barnes* [1900] AC 240 is a leading"
+          ],
+          "_overall": 64
+        },
+        "llama": {
+          "accuracy": 79,
+          "reasoning": 61,
+          "coherence": 79,
+          "grounding": 79,
+          "hallucination_risk": "low",
+          "consensus_score": 93,
+          "key_claims": [
+            "Gluckstein v Barnes [1900] AC 240 is a UK contract law case that established the"
+          ],
+          "_overall": 78
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 1350,
+        "totalLatencyMs": 32565,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 247,
+            "latencyMs": 6544,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 252,
+            "latencyMs": 4042,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 555,
+            "latencyMs": 6524,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 296,
+            "latencyMs": 15455,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "The case of Gluckstein v. Barnes (1900) is a notable English legal case concerning company law, specifically dealing with the duties and liabilities of directors during the process of company promotion. The case involved the sale and purchase of a company, where the directors of the purchasing company failed to disclose to the shareholders that they had received a financial benefit from the transaction.\n\nThe key issue in the case was whether the directors had breached their fiduciary duty by not disclosing their personal profits to the shareholders of the company. The court held that the directors had indeed breached their duty by failing to disclose their secret profits. The ruling emphasized that directors have a duty to act in the best interests of the company and its shareholders, and this includes an obligation to disclose any personal financial gains arising from transactions involving the company.\n\nThis case is significant in corporate law as it underscores the importance of transparency and the fiduciary duties of directors to their company and its shareholders.",
+        "claude": "# Gluckstein v. Barnes (1900)\n\nThis case established important principles regarding damages in property valuation cases.\n\n## Key facts:\n- The plaintiff's property was compulsorily purchased by a railway company\n- The property had special value to the railway company beyond its market value\n- The railway company attempted to pay only the market value\n\n## Court ruling:\nThe House of Lords held that when property is compulsorily purchased, the owner is entitled to:\n- The market value of the property\n- Any additional value the property might have to the purchaser (special value)\n\n## Legal principle established:\nWhen calculating compensation for compulsory purchase, the owner should receive the full value of what they've lost, including any special value to the purchaser, not just the general market value.\n\nThis case remains an important precedent in compulsory purchase and valuation law.",
+        "gemini": "*Gluckstein v Barnes* [1900] AC 240 is a leading",
+        "llama": "Gluckstein v Barnes [1900] AC 240 is a UK contract law case that established the principle that an acceptance of an offer must be communicated to the offeror to be effective.\n\nFacts: The plaintiff, Gluckstein, offered to buy shares from the defendant, Barnes. Barnes accepted the offer by posting a letter, but the letter was lost in the mail. Gluckstein did not receive the letter and sold the shares to someone else.\n\nHolding: The House of Lords held that there was no contract between Gluckstein and Barnes because the acceptance was not communicated to Gluckstein. The court ruled that an acceptance is only effective when it is received by the offeror, and that the risk of loss or delay in the postal system falls on the acceptor.\n\nThis case is often cited as an example of the \"postal rule\" exception, which states that an acceptance is effective when posted, but only if the offeror has specified that postal acceptance is acceptable. However, in this case, the offer did not specify that postal acceptance was acceptable, so the general rule applied, and the acceptance was not effective until received by the offeror."
+      }
+    },
+    {
+      "id": "1776591491524-2s4h85",
+      "createdAt": "2026-04-19T09:38:11.524Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "what colour is an apple?",
+      "taskType": "general",
+      "topModel": "Claude 3.7 Sonnet",
+      "confidence": 97,
+      "synthesizedAnswer": "Apples are most commonly red, green, or yellow.\n\nSpecific varieties determine the exact color.",
+      "ranking": [
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 63,
+          "grounding": 48,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 96
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 60,
+          "grounding": 46,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 59,
+          "grounding": 46,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 58,
+          "grounding": 46,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 97
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Apples can be various colors, including red, green, yellow, or a combination of "
+          ],
+          "_overall": 59
+        },
+        "claude": {
+          "accuracy": 60,
+          "reasoning": 54,
+          "coherence": 66,
+          "grounding": 48,
+          "hallucination_risk": "low",
+          "consensus_score": 96,
+          "key_claims": [
+            "Apples come in various colors depending on the variety"
+          ],
+          "_overall": 63
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "medium",
+          "consensus_score": 97,
+          "key_claims": [
+            "Apples are most commonly red, green, or yellow"
+          ],
+          "_overall": 58
+        },
+        "llama": {
+          "accuracy": 57,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Apples are typically red, but they can also be green, yellow, or a combination o"
+          ],
+          "_overall": 60
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 875,
+        "totalLatencyMs": 15576,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 78,
+            "latencyMs": 2408,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 162,
+            "latencyMs": 2358,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 551,
+            "latencyMs": 6714,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 84,
+            "latencyMs": 4096,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Apples can be various colors, including red, green, yellow, or a combination of these colors, depending on the variety.",
+        "claude": "Apples come in various colors depending on the variety. Common apple colors include:\n\n- Red (varieties like Red Delicious, Gala)\n- Green (Granny Smith, Golden Delicious)\n- Yellow (Golden Delicious)\n- Pink/blush (Pink Lady)\n- Bicolored combinations (Honeycrisp with red and yellow)\n\nThe color can vary based on the specific apple variety, ripeness, and growing conditions.",
+        "gemini": "Apples are most commonly red, green, or yellow.\n\nSpecific varieties determine the exact color.",
+        "llama": "Apples are typically red, but they can also be green, yellow, or a combination of these colours, depending on the variety."
+      }
+    },
+    {
+      "id": "1776584473481-wkwhdg",
+      "createdAt": "2026-04-19T07:41:13.481Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "what is python and applr",
+      "taskType": "research",
+      "topModel": "Llama 3.1 70B",
+      "confidence": 83,
+      "synthesizedAnswer": "Synthesis failed: fetch failed",
+      "ranking": [
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 81,
+          "grounding": 79,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 90
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 80,
+          "grounding": 78,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 91
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 78,
+          "grounding": 80,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 94
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 57,
+          "grounding": 46,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 75
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 80,
+          "reasoning": 62,
+          "coherence": 80,
+          "grounding": 80,
+          "hallucination_risk": "low",
+          "consensus_score": 94,
+          "key_claims": [
+            "**Verified Facts:**\n- Python is a high-level, interpreted programming language k"
+          ],
+          "_overall": 78
+        },
+        "claude": {
+          "accuracy": 77,
+          "reasoning": 80,
+          "coherence": 76,
+          "grounding": 78,
+          "hallucination_risk": "low",
+          "consensus_score": 91,
+          "key_claims": [
+            "# Verified Facts\n- Python is a high-level, interpreted programming language crea"
+          ],
+          "_overall": 80
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 75,
+          "key_claims": [
+            "### Verified Facts\n\n*   **Python:** An interpreted, high-level, general-purpose "
+          ],
+          "_overall": 57
+        },
+        "llama": {
+          "accuracy": 78,
+          "reasoning": 80,
+          "coherence": 77,
+          "grounding": 79,
+          "hallucination_risk": "low",
+          "consensus_score": 90,
+          "key_claims": [
+            "**Verified Facts:**\n\n1"
+          ],
+          "_overall": 81
+        }
+      },
+      "benchmark": {
+        "taskType": "research",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 1369,
+        "totalLatencyMs": 27947,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 273,
+            "latencyMs": 8801,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 274,
+            "latencyMs": 5423,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 551,
+            "latencyMs": 7009,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 271,
+            "latencyMs": 6714,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "**Verified Facts:**\n- Python is a high-level, interpreted programming language known for its clear syntax and readability. It supports multiple programming paradigms, including procedural, object-oriented, and functional programming. Python is widely used in various fields such as web development, data analysis, artificial intelligence, scientific computing, and more.\n\n**Assumptions:**\n- \"Applr\" could be a typographical error. The user might be referring to \"Apple,\" which is a well-known technology company that designs, manufactures, and markets consumer electronics, software, and online services. The most recognized products include the iPhone, iPad, Mac computers, and the software platforms iOS, macOS, and others.\n\n**Verification Guidance:**\n- To verify the information about Python, consult the official Python website or reputable educational resources that provide programming language tutorials and documentation.\n- To clarify \"Applr,\" consider the context in which it was used or check for common typos related to technology companies. If it was intended to mean \"Apple,\" verify by visiting Apple's official website or trusted news sources reporting on technology companies.",
+        "claude": "# Verified Facts\n- Python is a high-level, interpreted programming language created by Guido van Rossum and first released in 1991.\n- Python supports multiple programming paradigms, including structured, object-oriented, and functional programming.\n- Python is known for its readability and simple syntax that emphasizes code readability.\n\n# Unverified/Unclear\n- \"applr\" is not a recognized standard term in computing or programming.\n- Without additional context, I cannot determine what \"applr\" refers to. It could be:\n  - A typo (possibly for \"Apple\")\n  - An abbreviation for an application or technology\n  - A specific software or tool\n\n# Verification Guidance\n- Python information can be verified through official Python documentation (python.org), programming textbooks, or academic sources.\n- For \"applr,\" the user should clarify what they're referring to, as this term is ambiguous and requires additional context to provide accurate information.",
+        "gemini": "### Verified Facts\n\n*   **Python:** An interpreted, high-level, general-purpose programming language",
+        "llama": "**Verified Facts:**\n\n1. **Python**: Python is a high-level, interpreted programming language that is widely used for web development, scientific computing, data analysis, artificial intelligence, and more. (Verification: Official Python website, Wikipedia)\n2. **Applr**: No verified information is available on \"Applr\" as it is not a widely recognized term or entity in the tech industry. (Verification: None)\n\n**Assumptions:**\n\n1. **Applr**: It is possible that \"Applr\" is a misspelling or variation of \"Apple\", a well-known technology company. Alternatively, it could be a fictional or proprietary term. (Verification: None)\n\n**Verification Guidance:**\n\nTo verify the information on Python, you can visit the official Python website (python.org) or consult reputable sources such as Wikipedia or online programming communities.\n\nTo verify the information on Applr, further research is needed to determine if it is a valid term or entity. You can try searching online or checking industry-specific resources to see if any information is available."
+      }
+    },
+    {
+      "id": "1776584214124-7xtgg3",
+      "createdAt": "2026-04-19T07:36:54.124Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "what colour is an apple?",
+      "taskType": "general",
+      "topModel": "Claude 3.7 Sonnet",
+      "confidence": 98,
+      "synthesizedAnswer": "Synthesis failed: fetch failed",
+      "ranking": [
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 62,
+          "grounding": 48,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 97
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 60,
+          "grounding": 46,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 59,
+          "grounding": 46,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 58,
+          "grounding": 46,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 97
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 99,
+          "key_claims": [
+            "Apples can be various colors, including red, green, yellow, or a combination of "
+          ],
+          "_overall": 59
+        },
+        "claude": {
+          "accuracy": 59,
+          "reasoning": 53,
+          "coherence": 66,
+          "grounding": 48,
+          "hallucination_risk": "low",
+          "consensus_score": 97,
+          "key_claims": [
+            "Apples come in various colors depending on the variety"
+          ],
+          "_overall": 62
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 62,
+          "grounding": 46,
+          "hallucination_risk": "medium",
+          "consensus_score": 97,
+          "key_claims": [
+            "Apples come in several colors, primarily determined by the variety"
+          ],
+          "_overall": 58
+        },
+        "llama": {
+          "accuracy": 57,
+          "reasoning": 52,
+          "coherence": 63,
+          "grounding": 46,
+          "hallucination_risk": "low",
+          "consensus_score": 100,
+          "key_claims": [
+            "Apples can be various colours, including red, green, yellow, and sometimes a com"
+          ],
+          "_overall": 60
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 875,
+        "totalLatencyMs": 15162,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 78,
+            "latencyMs": 2361,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 155,
+            "latencyMs": 2112,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 551,
+            "latencyMs": 8222,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 91,
+            "latencyMs": 2467,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Apples can be various colors, including red, green, yellow, or a combination of these colors, depending on the variety.",
+        "claude": "Apples come in various colors depending on the variety. Common apple colors include:\n\n- Red (varieties like Red Delicious, Gala)\n- Green (Granny Smith)\n- Yellow (Golden Delicious)\n- Pink/blush (Pink Lady)\n- Red-yellow combinations (Fuji, Honeycrisp)\n\nThe color can vary based on the specific variety, ripeness, and growing conditions.",
+        "gemini": "Apples come in several colors, primarily determined by the variety. The most common colors are:\n\n*",
+        "llama": "Apples can be various colours, including red, green, yellow, and sometimes a combination of these colours. The exact colour of an apple depends on the specific variety."
+      }
+    },
+    {
+      "id": "1776583563821-862eor",
+      "createdAt": "2026-04-19T07:26:03.821Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "hi",
+      "taskType": "general",
+      "topModel": "GPT-4 Turbo",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesis failed: OpenRouter API failed: 402 {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 500 tokens, but can only afford 264. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3CYr833Ezlqn816qSuUiMTc0OSl\"}",
+      "ranking": [
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "claude": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "gemini": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 60,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "llama": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 714,
+        "totalLatencyMs": 14686,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 56,
+            "latencyMs": 1586,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 64,
+            "latencyMs": 4168,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 533,
+            "latencyMs": 7570,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 61,
+            "latencyMs": 1362,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Hello! How can I assist you today?",
+        "claude": "Hello! How can I help you today?",
+        "gemini": "Hello. How can I help you?",
+        "llama": "Hello. How can I assist you today?"
+      }
+    },
+    {
+      "id": "1776583518710-t6a70c",
+      "createdAt": "2026-04-19T07:25:18.710Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "hi",
+      "taskType": "general",
+      "topModel": "GPT-4 Turbo",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesis failed: OpenRouter API failed: 402 {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 500 tokens, but can only afford 264. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3CYr833Ezlqn816qSuUiMTc0OSl\"}",
+      "ranking": [
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "claude": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "gemini": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 60,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "llama": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 714,
+        "totalLatencyMs": 12681,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 56,
+            "latencyMs": 2057,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 64,
+            "latencyMs": 943,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 533,
+            "latencyMs": 7088,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 61,
+            "latencyMs": 2593,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Hello! How can I assist you today?",
+        "claude": "Hello! How can I help you today?",
+        "gemini": "Hello. How can I help you?",
+        "llama": "Hello. How can I assist you today?"
+      }
+    },
+    {
+      "id": "1776583395445-1ueqx1",
+      "createdAt": "2026-04-19T07:23:15.445Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "hello",
+      "taskType": "general",
+      "topModel": "Gemini 2.5 Pro",
+      "confidence": 99,
+      "synthesizedAnswer": "Synthesis failed: OpenRouter API failed: 402 {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 500 tokens, but can only afford 264. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3CYr833Ezlqn816qSuUiMTc0OSl\"}",
+      "ranking": [
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 58,
+          "grounding": 46,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "claude": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 61,
+          "grounding": 46,
+          "hallucination_risk": "medium",
+          "consensus_score": 99,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 58
+        },
+        "llama": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 722,
+        "totalLatencyMs": 11389,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 56,
+            "latencyMs": 1872,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 64,
+            "latencyMs": 1845,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 541,
+            "latencyMs": 6936,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 61,
+            "latencyMs": 736,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Hello! How can I assist you today?",
+        "claude": "Hello! How can I help you today?",
+        "gemini": "Hello. I am ready to assist. Please provide a specific query or task.",
+        "llama": "Hello. How can I assist you today?"
+      }
+    },
+    {
+      "id": "1776583201052-du1f9w",
+      "createdAt": "2026-04-19T07:20:01.052Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "hi in one word",
+      "taskType": "general",
+      "topModel": "GPT-4 Turbo",
+      "confidence": 100,
+      "synthesizedAnswer": "Synthesis failed: OpenRouter API failed: 402 {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 500 tokens, but can only afford 264. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3CYr833Ezlqn816qSuUiMTc0OSl\"}",
+      "ranking": [
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 60,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "claude": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 60,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hi"
+          ],
+          "_overall": 57
+        },
+        "gemini": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 60,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hi"
+          ],
+          "_overall": 57
+        },
+        "llama": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 60,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 495,
+        "totalLatencyMs": 9312,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 51,
+            "latencyMs": 1766,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 60,
+            "latencyMs": 1615,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 328,
+            "latencyMs": 4967,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 56,
+            "latencyMs": 964,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Hello",
+        "claude": "Hi.",
+        "gemini": "Hi",
+        "llama": "Hello"
+      }
+    },
+    {
+      "id": "1776583088151-e5w8od",
+      "createdAt": "2026-04-19T07:18:08.151Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "hello",
+      "taskType": "general",
+      "topModel": "Gemini 2.5 Pro",
+      "confidence": 99,
+      "synthesizedAnswer": "Synthesis failed: OpenRouter API failed: 402 {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 500 tokens, but can only afford 264. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3CYr833Ezlqn816qSuUiMTc0OSl\"}",
+      "ranking": [
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 58,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "claude": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 99,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 58
+        },
+        "llama": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 719,
+        "totalLatencyMs": 11644,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 56,
+            "latencyMs": 1720,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 64,
+            "latencyMs": 1529,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 538,
+            "latencyMs": 7437,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 61,
+            "latencyMs": 958,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Hello! How can I assist you today?",
+        "claude": "Hello! How can I help you today?",
+        "gemini": "Hello. I am a large language model, trained by Google.",
+        "llama": "Hello. How can I assist you today?"
+      }
+    },
+    {
+      "id": "1776583015741-xepscy",
+      "createdAt": "2026-04-19T07:16:55.741Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "hello",
+      "taskType": "general",
+      "topModel": "Gemini 2.5 Pro",
+      "confidence": 99,
+      "synthesizedAnswer": "Synthesis failed: OpenRouter API failed: 402 {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 500 tokens, but can only afford 264. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3CYr833Ezlqn816qSuUiMTc0OSl\"}",
+      "ranking": [
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 58,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "claude": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 99,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 58
+        },
+        "llama": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 722,
+        "totalLatencyMs": 12004,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 56,
+            "latencyMs": 2510,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 64,
+            "latencyMs": 1299,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 541,
+            "latencyMs": 6865,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 61,
+            "latencyMs": 1330,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Hello! How can I assist you today?",
+        "claude": "Hello! How can I help you today?",
+        "gemini": "Hello. I am ready to assist. Please provide your query.",
+        "llama": "Hello. How can I assist you today?"
+      }
+    },
+    {
+      "id": "1776582857625-6gzz9r",
+      "createdAt": "2026-04-19T07:14:17.625Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "hello",
+      "taskType": "general",
+      "topModel": "Gemini 2.5 Pro",
+      "confidence": 99,
+      "synthesizedAnswer": "Hello! How can I assist you today? Please let me know what you need help with.",
+      "ranking": [
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 58,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 99
+        },
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 100
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "claude": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 99,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 58
+        },
+        "llama": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 100,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 721,
+        "totalLatencyMs": 12078,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 56,
+            "latencyMs": 1818,
+            "provider": "groq",
+            "source": "api"
+          },
+          "claude": {
+            "tokensUsed": 64,
+            "latencyMs": 1085,
+            "provider": "groq",
+            "source": "api"
+          },
+          "gemini": {
+            "tokensUsed": 540,
+            "latencyMs": 7485,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 61,
+            "latencyMs": 1690,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Hello! How can I assist you today?",
+        "claude": "Hello! How can I help you today?",
+        "gemini": "Hello. I am ready to assist. Please provide your query.",
+        "llama": "Hello. How can I assist you today?"
+      }
+    },
+    {
+      "id": "1776582821579-ifix6d",
+      "createdAt": "2026-04-19T07:13:41.579Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "hello",
+      "taskType": "general",
+      "topModel": "GPT-4 Turbo",
+      "confidence": 94,
+      "synthesizedAnswer": "Hello. How can I assist you today? I am a large language model ready to assist with your request.",
+      "ranking": [
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 69,
+          "grounding": 50,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 91
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 69,
+          "grounding": 50,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 91
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 58,
+          "grounding": 46,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 92
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 91
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 62,
+          "reasoning": 76,
+          "coherence": 69,
+          "grounding": 50,
+          "hallucination_risk": "low",
+          "consensus_score": 91,
+          "key_claims": [
+            "Error 402: {\"modelId\":\"openai/gpt-4-turbo\",\"content\":\"This request requires more"
+          ],
+          "_overall": 69
+        },
+        "claude": {
+          "accuracy": 62,
+          "reasoning": 76,
+          "coherence": 69,
+          "grounding": 50,
+          "hallucination_risk": "low",
+          "consensus_score": 91,
+          "key_claims": [
+            "Error 402: {\"modelId\":\"anthropic/claude-3"
+          ],
+          "_overall": 69
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 61,
+          "grounding": 46,
+          "hallucination_risk": "medium",
+          "consensus_score": 92,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 58
+        },
+        "llama": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 91,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 603,
+        "totalLatencyMs": 8926,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 0,
+            "latencyMs": 697,
+            "provider": "local-fallback",
+            "source": "fallback"
+          },
+          "claude": {
+            "tokensUsed": 0,
+            "latencyMs": 161,
+            "provider": "local-fallback",
+            "source": "fallback"
+          },
+          "gemini": {
+            "tokensUsed": 542,
+            "latencyMs": 6519,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 61,
+            "latencyMs": 1549,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Error 402: {\"modelId\":\"openai/gpt-4-turbo\",\"content\":\"This request requires more credits, or fewer max_tokens. You requested up to 512 tokens, but can only afford 172. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"tokensUsed\":0,\"latencyMs\":115,\"error\":\"This request requires more credits, or fewer max_tokens. You requested up to 512 tokens, but can only afford 172. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\"}\n\n[Fallback mode] OpenRouter request failed or key missing.",
+        "claude": "Error 402: {\"modelId\":\"anthropic/claude-3.7-sonnet\",\"content\":\"This request requires more credits, or fewer max_tokens. You requested up to 512 tokens, but can only afford 345. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"tokensUsed\":0,\"latencyMs\":34,\"error\":\"This request requires more credits, or fewer max_tokens. You requested up to 512 tokens, but can only afford 345. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\"}\n\n[Fallback mode] OpenRouter request failed or key missing.",
+        "gemini": "Hello. I am a large language model ready to assist with your request.",
+        "llama": "Hello. How can I assist you today?"
+      }
+    },
+    {
+      "id": "1776582535012-nvhhs0",
+      "createdAt": "2026-04-19T07:08:55.012Z",
+      "userEmail": "admin@fusion.ai",
+      "query": "hello",
+      "taskType": "general",
+      "topModel": "GPT-4 Turbo",
+      "confidence": 94,
+      "synthesizedAnswer": "Hello! How can I assist you today?",
+      "ranking": [
+        {
+          "modelKey": "gpt4",
+          "model": "GPT-4 Turbo",
+          "overall": 69,
+          "grounding": 50,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 91
+        },
+        {
+          "modelKey": "claude",
+          "model": "Claude 3.7 Sonnet",
+          "overall": 69,
+          "grounding": 50,
+          "hallucinationRisk": "low",
+          "biasScore": 0,
+          "consensus": 91
+        },
+        {
+          "modelKey": "gemini",
+          "model": "Gemini 2.5 Pro",
+          "overall": 58,
+          "grounding": 46,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 92
+        },
+        {
+          "modelKey": "llama",
+          "model": "Llama 3.1 70B",
+          "overall": 57,
+          "grounding": 45,
+          "hallucinationRisk": "medium",
+          "biasScore": 0,
+          "consensus": 91
+        }
+      ],
+      "scores": {
+        "gpt4": {
+          "accuracy": 62,
+          "reasoning": 76,
+          "coherence": 69,
+          "grounding": 50,
+          "hallucination_risk": "low",
+          "consensus_score": 91,
+          "key_claims": [
+            "Error 402: {\"modelId\":\"openai/gpt-4-turbo\",\"content\":\"This request requires more"
+          ],
+          "_overall": 69
+        },
+        "claude": {
+          "accuracy": 62,
+          "reasoning": 76,
+          "coherence": 69,
+          "grounding": 50,
+          "hallucination_risk": "low",
+          "consensus_score": 91,
+          "key_claims": [
+            "Error 402: {\"modelId\":\"anthropic/claude-3"
+          ],
+          "_overall": 69
+        },
+        "gemini": {
+          "accuracy": 56,
+          "reasoning": 51,
+          "coherence": 61,
+          "grounding": 46,
+          "hallucination_risk": "medium",
+          "consensus_score": 92,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 58
+        },
+        "llama": {
+          "accuracy": 55,
+          "reasoning": 50,
+          "coherence": 61,
+          "grounding": 45,
+          "hallucination_risk": "medium",
+          "consensus_score": 91,
+          "key_claims": [
+            "Hello"
+          ],
+          "_overall": 57
+        }
+      },
+      "benchmark": {
+        "taskType": "general",
+        "evaluatedDimensions": [
+          "accuracy",
+          "reasoning",
+          "coherence",
+          "completeness",
+          "safety"
+        ],
+        "responseCount": 4,
+        "totalTokens": 605,
+        "totalLatencyMs": 9693,
+        "modelTelemetry": {
+          "gpt4": {
+            "tokensUsed": 0,
+            "latencyMs": 603,
+            "provider": "local-fallback",
+            "source": "fallback"
+          },
+          "claude": {
+            "tokensUsed": 0,
+            "latencyMs": 143,
+            "provider": "local-fallback",
+            "source": "fallback"
+          },
+          "gemini": {
+            "tokensUsed": 544,
+            "latencyMs": 6905,
+            "provider": "groq",
+            "source": "api"
+          },
+          "llama": {
+            "tokensUsed": 61,
+            "latencyMs": 2042,
+            "provider": "groq",
+            "source": "api"
+          }
+        }
+      },
+      "responses": {
+        "gpt4": "Error 402: {\"modelId\":\"openai/gpt-4-turbo\",\"content\":\"This request requires more credits, or fewer max_tokens. You requested up to 512 tokens, but can only afford 233. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"tokensUsed\":0,\"latencyMs\":117,\"error\":\"This request requires more credits, or fewer max_tokens. You requested up to 512 tokens, but can only afford 233. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\"}\n\n[Fallback mode] OpenRouter request failed or key missing.",
+        "claude": "Error 402: {\"modelId\":\"anthropic/claude-3.7-sonnet\",\"content\":\"This request requires more credits, or fewer max_tokens. You requested up to 512 tokens, but can only afford 466. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"tokensUsed\":0,\"latencyMs\":44,\"error\":\"This request requires more credits, or fewer max_tokens. You requested up to 512 tokens, but can only afford 466. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\"}\n\n[Fallback mode] OpenRouter request failed or key missing.",
+        "gemini": "Hello. I am a large language model trained by Google. How can I help you?",
+        "llama": "Hello. How can I assist you today?"
+      }
+    },
+    {
       "id": "1776576481698-32b2le",
       "createdAt": "2026-04-19T05:28:01.698Z",
       "userEmail": "admin@fusion.ai",

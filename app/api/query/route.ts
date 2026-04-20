@@ -99,23 +99,40 @@ export async function POST(req: NextRequest) {
   const start = Date.now();
 
   try {
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://fusion.ai',
-        'X-Title': 'Fusion AI',
-      },
-      body: JSON.stringify({
-        model: modelId,
-        max_tokens: 512,
-        messages: [
-          { role: 'system', content: systemPromptForTask(taskProfile) },
-          { role: 'user', content: prompt },
-        ],
-      }),
-    })
+    // Helper to call OpenRouter with optional retry on 402 (insufficient credits)
+    async function callOpenRouter(maxTokens: number) {
+      return await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://fusion.ai',
+          'X-Title': 'Fusion AI',
+        },
+        body: JSON.stringify({
+          model: modelId,
+          max_tokens: maxTokens,
+          messages: [
+            { role: 'system', content: systemPromptForTask(taskProfile) },
+            { role: 'user', content: prompt },
+          ],
+        }),
+      })
+    }
+
+    let response = await callOpenRouter(512)
+    if (response.status === 402) {
+      const text = await response.text().catch(() => '')
+      const m = text.match(/can only afford\s+(\d+)/i)
+      if (m) {
+        const afford = Math.max(16, Number(m[1]) - 10)
+        // retry once with lower token allowance
+        response = await callOpenRouter(afford)
+      } else {
+        // Reset body text for later error handling
+        (response as Response & { _bodyText?: string })._bodyText = text
+      }
+    }
 
     if (!response.ok) {
       const errorText = await response.text()

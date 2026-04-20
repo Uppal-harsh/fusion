@@ -10,9 +10,20 @@ export type ModelKey = 'gpt4' | 'claude' | 'gemini' | 'llama'
 
 // ─── Helper to get base URL for server-side fetch calls ───────────
 function getBaseUrl(): string {
-  if (process.env.NEXTAUTH_URL) {
-    return process.env.NEXTAUTH_URL
+  // When running in the browser, prefer relative URLs so requests go
+  // to the same origin/port that served the page (avoids hard-coded
+  // ports like http://localhost:3000 when the dev server picked a
+  // different available port).
+  if (typeof window !== 'undefined') return ''
+  const raw = process.env.NEXTAUTH_URL?.toString().trim()
+  if (raw) {
+    // If the value already contains a scheme, use it as-is. Otherwise
+    // assume HTTPS for deployed hosts and prepend it so fetch() receives
+    // a valid absolute URL (avoids "Failed to parse URL" errors).
+    if (/^[a-zA-Z]+:\/\//.test(raw)) return raw.replace(/\/$/, '')
+    return `https://${raw.replace(/\/$/, '')}`
   }
+
   // Fallback for development
   return 'http://localhost:3000'
 }
